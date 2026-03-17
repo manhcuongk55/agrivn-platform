@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVN — Vietnam's B2B Agricultural Export Platform</title>
+  <meta name="description" content="AgriVN connects Vietnamese agricultural producers with global buyers. Source coffee, durian, rice and tropical fruits directly from verified farms." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">AgriVN</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#marketplace" class="nav-link">Marketplace</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#producers" class="nav-link">Producers</a></li>
+        <li><a href="#insights" class="nav-link">Market Intel</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-ghost" id="loginBtn">Sign In</button>
+        <button class="btn-primary" id="signupBtn">Start Sourcing</button>
+      </div>
+      <button class="nav-hamburger" id="hamburger">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Vietnam's #1 Agri Export Network — 1,200+ Verified Producers
+      </div>
+      <h1 class="hero-title">
+        Source Vietnam's Best<br />
+        <span class="hero-highlight">Agricultural Products</span><br />
+        Directly from Farms
+      </h1>
+      <p class="hero-sub">
+        From Dak Lak coffee to Mekong durian — connect with verified producers,<br class="hide-mobile" />
+        handle logistics & trade financing all in one B2B platform.
+      </p>
+      <div class="hero-cta-group">
+        <button class="btn-hero-primary" id="startSourcingBtn">Start Sourcing Now →</button>
+        <button class="btn-hero-ghost" id="watchDemoBtn">
+          <span class="play-icon">▶</span> Watch Demo
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card" id="stat1">
+          <div class="stat-num">$2.4B</div>
+          <div class="stat-label">GMV Facilitated</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card" id="stat2">
+          <div class="stat-num">48</div>
+          <div class="stat-label">Countries Reached</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card" id="stat3">
+          <div class="stat-num">1,200+</div>
+          <div class="stat-label">Verified Farms</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card" id="stat4">
+          <div class="stat-num">96%</div>
+          <div class="stat-label">On-time Delivery</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="tick-item">☕ Robusta Coffee — $2,340/MT <span class="tick-up">▲ 3.2%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🌾 White Rice — $520/MT <span class="tick-down">▼ 0.8%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🍈 Monthong Durian — $4,200/MT <span class="tick-up">▲ 7.1%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🥭 Mango — $890/MT <span class="tick-up">▲ 1.4%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🫘 Arabica Coffee — $3,780/MT <span class="tick-up">▲ 5.5%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🍌 Banana — $410/MT <span class="tick-down">▼ 1.2%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🐉 Dragon Fruit — $760/MT <span class="tick-up">▲ 2.9%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">☕ Robusta Coffee — $2,340/MT <span class="tick-up">▲ 3.2%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🌾 White Rice — $520/MT <span class="tick-down">▼ 0.8%</span></span>
+      <span class="tick-sep">|</span>
+      <span class="tick-item">🍈 Monthong Durian — $4,200/MT <span class="tick-up">▲ 7.1%</span></span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="marketplace">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Product Categories</div>
+        <h2 class="section-title">Vietnam's Export <span class="text-accent">Powerhouses</span></h2>
+        <p class="section-sub">Discover premium agricultural products from Vietnam's most productive growing regions</p>
+      </div>
+      <div class="cat-grid">
+
+        <div class="cat-card cat-coffee" id="catCoffee">
+          <div class="cat-emoji">☕</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Coffee</h3>
+            <p class="cat-region">Dak Lak, Lam Dong, Gia Lai</p>
+            <div class="cat-meta">
+              <span class="cat-volume">1.8M MT/yr</span>
+              <span class="cat-rank">#2 World</span>
+            </div>
+            <div class="cat-price-row">
+              <span class="cat-price">$2,340/MT</span>
+              <span class="cat-change up">▲ 3.2%</span>
+            </div>
+          </div>
+          <button class="cat-btn">Browse Lots →</button>
+          <div class="cat-badge">Most Traded</div>
+        </div>
+
+        <div class="cat-card cat-durian" id="catDurian">
+          <div class="cat-emoji">🍈</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Durian</h3>
+            <p class="cat-region">Dak Lak, Binh Phuoc, Tien Giang</p>
+            <div class="cat-meta">
+              <span class="cat-volume">450K MT/yr</span>
+              <span class="cat-rank">Growing Fast</span>
+            </div>
+            <div class="cat-price-row">
+              <span class="cat-price">$4,200/MT</span>
+              <span class="cat-change up">▲ 7.1%</span>
+            </div>
+          </div>
+          <button class="cat-btn">Browse Lots →</button>
+          <div class="cat-badge hot">🔥 Hot</div>
+        </div>
+
+        <div class="cat-card cat-rice" id="catRice">
+          <div class="cat-emoji">🌾</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Rice</h3>
+            <p class="cat-region">Mekong Delta, Long An, Dong Thap</p>
+            <div class="cat-meta">
+              <span class="cat-volume">7.2M MT/yr</span>
+              <span class="cat-rank">#3 World</span>
+            </div>
+            <div class="cat-price-row">
+              <span class="cat-price">$520/MT</span>
+              <span class="cat-change down">▼ 0.8%</span>
+            </div>
+          </div>
+          <button class="cat-btn">Browse Lots →</button>
+        </div>
+
+        <div class="cat-card cat-tropical" id="catTropical">
+          <div class="cat-emoji">🥭</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Tropical Fruits</h3>
+            <p class="cat-region">Mekong, Central Highlands, Binh Thuan</p>
+            <div class="cat-meta">
+              <span class="cat-volume">5.5M MT/yr</span>
+              <span class="cat-rank">Diversified</span>
+            </div>
+            <div class="cat-price-row">
+              <span class="cat-price">from $380/MT</span>
+              <span class="cat-change up">▲ 2.1%</span>
+            </div>
+          </div>
+          <button class="cat-btn">Browse Lots →</button>
+        </div>
+
+        <div class="cat-card cat-cashew" id="catCashew">
+          <div class="cat-emoji">🫘</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Cashews</h3>
+            <p class="cat-region">Binh Phuoc, Dong Nai, Ba Ria-Vung Tau</p>
+            <div class="cat-meta">
+              <span class="cat-volume">350K MT/yr</span>
+              <span class="cat-rank">#1 World</span>
+            </div>
+            <div class="cat-price-row">
+              <span class="cat-price">$7,800/MT</span>
+              <span class="cat-change up">▲ 1.9%</span>
+            </div>
+          </div>
+          <button class="cat-btn">Browse Lots →</button>
+          <div class="cat-badge">World Leader</div>
+        </div>
+
+        <div class="cat-card cat-pepper" id="catPepper">
+          <div class="cat-emoji">🌶️</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Black Pepper</h3>
+            <p class="cat-region">Binh Phuoc, Gia Lai, Dak Nong</p>
+            <div class="cat-meta">
+              <span class="cat-volume">200K MT/yr</span>
+              <span class="cat-rank">#1 World</span>
+            </div>
+            <div class="cat-price-row">
+              <span class="cat-price">$5,200/MT</span>
+              <span class="cat-change up">▲ 4.3%</span>
+            </div>
+          </div>
+          <button class="cat-btn">Browse Lots →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Platform Services</div>
+        <h2 class="section-title">Everything You Need to <span class="text-accent">Export at Scale</span></h2>
+        <p class="section-sub">End-to-end infrastructure for B2B agricultural trade</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="svc-card svc-logistics" id="svcLogistics">
+          <div class="svc-icon-wrap">
+            <div class="svc-icon">🚢</div>
+          </div>
+          <h3 class="svc-title">Logistics Network</h3>
+          <p class="svc-desc">Door-to-port cold chain logistics with real-time tracking. Partner carriers across 48 countries.</p>
+          <ul class="svc-features">
+            <li>✓ Cold chain reefer containers</li>
+            <li>✓ Real-time GPS tracking</li>
+            <li>✓ Customs documentation</li>
+            <li>✓ Last-mile partnerships</li>
+          </ul>
+          <div class="svc-metric">
+            <div class="svc-metric-num">96%</div>
+            <div class="svc-metric-label">On-time delivery rate</div>
+          </div>
+          <button class="svc-cta" id="logisticsBtn">Get Quote →</button>
+        </div>
+
+        <div class="svc-card svc-financing" id="svcFinancing">
+          <div class="svc-icon-wrap">
+            <div class="svc-icon">💰</div>
+          </div>
+          <h3 class="svc-title">Trade Financing</h3>
+          <p class="svc-desc">Pre-harvest financing, invoice factoring, and Letters of Credit for verified buyers & sellers.</p>
+          <ul class="svc-features">
+            <li>✓ Pre-shipment finance</li>
+            <li>✓ Invoice factoring (90 days)</li>
+            <li>✓ LC issuance & confirmation</li>
+            <li>✓ FX hedging support</li>
+          </ul>
+          <div class="svc-metric">
+            <div class="svc-metric-num">$340M</div>
+            <div class="svc-metric-label">Deployed this quarter</div>
+          </div>
+          <button class="svc-cta" id="financingBtn">Apply for Credit →</button>
+          <div class="svc-badge">Most Popular</div>
+        </div>
+
+        <div class="svc-card svc-sourcing" id="svcSourcing">
+          <div class="svc-icon-wrap">
+            <div class="svc-icon">🔍</div>
+          </div>
+          <h3 class="svc-title">Sourcing Intelligence</h3>
+          <p class="svc-desc">AI-powered farm matching based on certifications, volume capacity, lead time & price benchmarks.</p>
+          <ul class="svc-features">
+            <li>✓ Farm verification reports</li>
+            <li>✓ Quality grading & testing</li>
+            <li>✓ Price benchmark alerts</li>
+            <li>✓ Seasonal availability maps</li>
+          </ul>
+          <div class="svc-metric">
+            <div class="svc-metric-num">3.2 days</div>
+            <div class="svc-metric-label">Avg. time to match</div>
+          </div>
+          <button class="svc-cta" id="sourcingBtn">Start Sourcing →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE LISTINGS -->
+  <section class="listings" id="listings">
+    <div class="container">
+      <div class="section-header listings-header">
+        <div>
+          <div class="section-tag">Live Market</div>
+          <h2 class="section-title">Active <span class="text-accent">Trade Lots</span></h2>
+        </div>
+        <div class="listings-controls">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search product, region, certification..." id="searchInput" />
+          </div>
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all" id="filterAll">All</button>
+            <button class="filter-tab" data-filter="coffee" id="filterCoffee">Coffee</button>
+            <button class="filter-tab" data-filter="durian" id="filterDurian">Durian</button>
+            <button class="filter-tab" data-filter="rice" id="filterRice">Rice</button>
+            <button class="filter-tab" data-filter="fruit" id="filterFruit">Fruits</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="listings-grid" id="listingsGrid">
+        <!-- Injected by JS -->
+      </div>
+
+      <div class="listings-load-more">
+        <button class="btn-load-more" id="loadMoreBtn">Load More Listings</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCERS MAP -->
+  <section class="producers" id="producers">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Producer Network</div>
+        <h2 class="section-title">1,200+ Farms Across <span class="text-accent">Vietnam's Best Regions</span></h2>
+        <p class="section-sub">Every producer is field-verified, certified, and rated by international buyers</p>
+      </div>
+      <div class="producers-layout">
+        <div class="vn-map-wrap">
+          <div class="vn-map" id="vnMap">
+            <svg class="map-svg" viewBox="0 0 280 500" xmlns="http://www.w3.org/2000/svg">
+              <!-- Simplified Vietnam silhouette shape -->
+              <path class="map-country" d="M180,20 L200,40 L210,70 L200,95 L215,120 L218,145 L205,160 L215,185 L220,210 L210,235 L215,260 L205,280 L195,300 L180,320 L155,340 L130,360 L110,380 L95,400 L80,420 L70,445 L75,465 L85,480 L100,485 L110,470 L120,450 L135,435 L140,420 L130,400 L115,380 L120,360 L140,345 L155,330 L165,310 L170,285 L160,265 L165,245 L155,220 L150,195 L155,165 L145,140 L140,115 L145,90 L135,65 L140,40 L155,25 Z" />
+              <!-- Region dots/pins -->
+              <g class="map-pins">
+                <circle class="map-pin coffee-pin" cx="170" cy="275" r="10" id="pinCoffee" />
+                <text class="pin-label" x="155" y="258">Dak Lak</text>
+                <circle class="map-pin durian-pin" cx="158" cy="295" r="8" id="pinDurian" />
+                <text class="pin-label" x="142" y="282">B. Phuoc</text>
+                <circle class="map-pin rice-pin" cx="120" cy="375" r="11" id="pinRice" />
+                <text class="pin-label" x="65" y="375">Mekong Delta</text>
+                <circle class="map-pin cashew-pin" cx="165" cy="308" r="7" id="pinCashew" />
+                <circle class="map-pin hanoi-pin" cx="155" cy="100" r="6" id="pinHanoi" />
+                <text class="pin-label" x="162" y="98">Hanoi</text>
+                <circle class="map-pin hcm-pin" cx="148" cy="338" r="7" id="pinHCM" />
+                <text class="pin-label" x="155" y="336">HCMC</text>
+              </g>
+            </svg>
+            <div class="map-legend">
+              <div class="legend-item"><span class="legend-dot coffee-pin"></span>Coffee</div>
+              <div class="legend-item"><span class="legend-dot durian-pin"></span>Durian</div>
+              <div class="legend-item"><span class="legend-dot rice-pin"></span>Rice</div>
+              <div class="legend-item"><span class="legend-dot cashew-pin"></span>Cashew</div>
+            </div>
+          </div>
+        </div>
+        <div class="producers-right">
+          <div class="producers-list" id="producersList">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET INSIGHTS -->
+  <section class="insights" id="insights">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Market Intelligence</div>
+        <h2 class="section-title">Real-time <span class="text-accent">Price & Trade Data</span></h2>
+      </div>
+      <div class="insights-grid">
+        <div class="insight-chart-card" id="priceChartCard">
+          <div class="chart-header">
+            <h3>Commodity Price Index (6 Months)</h3>
+            <div class="chart-tabs">
+              <button class="chart-tab active" id="tabCoffeeChart" data-chart="coffee">Coffee</button>
+              <button class="chart-tab" id="tabDurianChart" data-chart="durian">Durian</button>
+              <button class="chart-tab" id="tabRiceChart" data-chart="rice">Rice</button>
+            </div>
+          </div>
+          <canvas class="price-chart" id="priceChart" width="600" height="220"></canvas>
+        </div>
+        <div class="insight-side">
+          <div class="insight-stat-card" id="exportCard">
+            <div class="insight-stat-icon">📦</div>
+            <div>
+              <div class="insight-stat-num" id="counterExport">0</div>
+              <div class="insight-stat-label">Total Export Volume (MT) This Month</div>
+            </div>
+          </div>
+          <div class="insight-stat-card" id="tradeCard">
+            <div class="insight-stat-icon">🌍</div>
+            <div>
+              <div class="insight-stat-num" id="counterTrade">0</div>
+              <div class="insight-stat-label">Active Trade Deals</div>
+            </div>
+          </div>
+          <div class="top-buyers-card">
+            <h3 class="top-buyers-title">Top Buyer Countries</h3>
+            <div class="buyer-bars" id="buyerBars">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE FARM FEED -->
+  <section class="farm-feed" id="farmFeed">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">🔴 Live Now</div>
+        <h2 class="section-title">Farm Stories — <span class="text-accent">Watch & Source</span></h2>
+        <p class="section-sub">Short-form farm content: see harvests live, verify quality, order directly</p>
+      </div>
+      <div class="feed-grid">
+
+        <div class="feed-card" id="feed1">
+          <div class="feed-thumb" style="background:linear-gradient(135deg,#1a3d20,#2d6e3a)">
+            <div class="feed-play">▶</div>
+            <div class="feed-live-badge">🔴 LIVE</div>
+            <div class="feed-emoji">☕</div>
+            <div class="feed-views">👁 2,341 watching</div>
+          </div>
+          <div class="feed-body">
+            <div class="feed-farm">Dak Lak Coffex Farm</div>
+            <div class="feed-title">Robusta G1 Harvest — Buon Ma Thuot 2026</div>
+            <div class="feed-meta"><span class="feed-tag">☕ Coffee</span><span class="feed-tag">UTZ Certified</span></div>
+            <button class="feed-order-btn" onclick="openModal('sourcing')">Source This Lot →</button>
+          </div>
+        </div>
+
+        <div class="feed-card" id="feed2">
+          <div class="feed-thumb" style="background:linear-gradient(135deg,#3d3a00,#6b6200)">
+            <div class="feed-play">▶</div>
+            <div class="feed-emoji">🍈</div>
+            <div class="feed-views">👁 1,892 watching</div>
+          </div>
+          <div class="feed-body">
+            <div class="feed-farm">Mekong Premium Farms</div>
+            <div class="feed-title">Monthong Durian Quality Sort — Tien Giang</div>
+            <div class="feed-meta"><span class="feed-tag">🍈 Durian</span><span class="feed-tag">GlobalG.A.P</span></div>
+            <button class="feed-order-btn" onclick="openModal('sourcing')">Source This Lot →</button>
+          </div>
+        </div>
+
+        <div class="feed-card" id="feed3">
+          <div class="feed-thumb" style="background:linear-gradient(135deg,#1a3a28,#2a6644)">
+            <div class="feed-play">▶</div>
+            <div class="feed-emoji">🌾</div>
+            <div class="feed-views">👁 954 watching</div>
+          </div>
+          <div class="feed-body">
+            <div class="feed-farm">Delta Rice Corp</div>
+            <div class="feed-title">ST25 Organic — Milling & Packing Line Tour</div>
+            <div class="feed-meta"><span class="feed-tag">🌾 Rice</span><span class="feed-tag">Organic USDA</span></div>
+            <button class="feed-order-btn" onclick="openModal('sourcing')">Source This Lot →</button>
+          </div>
+        </div>
+
+        <div class="feed-card" id="feed4">
+          <div class="feed-thumb" style="background:linear-gradient(135deg,#3d1a00,#7a3300)">
+            <div class="feed-play">▶</div>
+            <div class="feed-emoji">🥭</div>
+            <div class="feed-badge-new">New</div>
+            <div class="feed-views">👁 631 watching</div>
+          </div>
+          <div class="feed-body">
+            <div class="feed-farm">Mekong Fresh Co.</div>
+            <div class="feed-title">Cat Hoa Loc Mango — Dong Thap Pre-Export Check</div>
+            <div class="feed-meta"><span class="feed-tag">🥭 Mango</span><span class="feed-tag">VietGAP</span></div>
+            <button class="feed-order-btn" onclick="openModal('sourcing')">Source This Lot →</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="feed-cta-row">
+        <button class="btn-feed-all" onclick="openModal('signup')">📡 Browse All 240+ Farm Streams →</button>
+        <p class="feed-note">Farmers post daily harvest updates. Buyers can request samples from any stream.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="cta-strip">
+    <div class="cta-strip-bg"></div>
+    <div class="container cta-strip-inner">
+      <div class="cta-strip-text">
+        <h2>Ready to Scale Your Agricultural Trade?</h2>
+        <p>Join 3,800+ importers and 1,200+ Vietnamese producers on AgriVN</p>
+      </div>
+      <div class="cta-strip-actions">
+        <button class="btn-cta-white" id="buyerSignupBtn">I'm a Buyer</button>
+        <button class="btn-cta-outline" id="sellerSignupBtn">I'm a Producer</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">🌿 AgriVN</div>
+          <p class="footer-tagline">Vietnam's Agri Export Intelligence Platform</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn">in</a>
+            <a href="#" class="social-btn">tw</a>
+            <a href="#" class="social-btn">yt</a>
+          </div>
+        </div>
+        <div class="footer-links-group">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">Trade Desk</a></li>
+            <li><a href="#">Logistics</a></li>
+            <li><a href="#">Financing</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4>For Buyers</h4>
+          <ul>
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">Verified Producers</a></li>
+            <li><a href="#">Quality Standards</a></li>
+            <li><a href="#">Sample Requests</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4>For Producers</h4>
+          <ul>
+            <li><a href="#">List Your Farm</a></li>
+            <li><a href="#">Certification Help</a></li>
+            <li><a href="#">Export Training</a></li>
+            <li><a href="#">Finance Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About AgriVN</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 AgriVN. All rights reserved.</span>
+        <span>Headquartered in Ho Chi Minh City 🇻🇳</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-icon" id="modalIcon">🌿</div>
+      <h2 class="modal-title" id="modalTitle">Join AgriVN</h2>
+      <p class="modal-sub" id="modalSub">Access Vietnam's #1 B2B agricultural export platform</p>
+      <div class="modal-form">
+        <input type="text" placeholder="Company Name" class="modal-input" id="modalCompany" />
+        <input type="email" placeholder="Business Email" class="modal-input" id="modalEmail" />
+        <select class="modal-input" id="modalRole">
+          <option value="">I am a...</option>
+          <option>Importer / Buyer</option>
+          <option>Export Agent</option>
+          <option>Farm / Producer</option>
+          <option>Logistics Provider</option>
+          <option>Finance / Bank</option>
+        </select>
+        <button class="modal-submit" id="modalSubmit">Get Early Access →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI CHAT WIDGET -->
+  <div class="ai-chat-widget" id="aiChat">
+    <button class="ai-chat-toggle" id="aiChatToggle" aria-label="AI Sourcing Assistant">
+      <span class="ai-toggle-icon">🤖</span>
+      <span class="ai-toggle-label">AI Sourcing</span>
+      <span class="ai-toggle-close" id="aiToggleClose" style="display:none">✕</span>
+    </button>
+    <div class="ai-chat-box" id="aiChatBox">
+      <div class="ai-chat-header">
+        <div class="ai-header-left">
+          <div class="ai-avatar">🌿</div>
+          <div>
+            <div class="ai-name">AgriVN AI</div>
+            <div class="ai-status"><span class="ai-dot"></span> Online — responds in seconds</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-messages" id="aiMessages">
+        <div class="ai-msg bot">
+          <div class="ai-bubble">Xin chào! 👋 I'm your AI sourcing assistant.<br/><br/>Tell me what you need — product, volume, certifications, delivery window — and I'll match you with verified Vietnamese farms instantly.</div>
+        </div>
+        <div class="ai-suggestions" id="aiSuggestions">
+          <button class="ai-suggest" data-msg="I need 50MT Organic Arabica Coffee, Q3 delivery">☕ 50MT Arabica, Q3</button>
+          <button class="ai-suggest" data-msg="Looking for Monthong Durian, IQF frozen, 20MT minimum">🍈 Durian IQF 20MT</button>
+          <button class="ai-suggest" data-msg="Need ST25 Jasmine Rice, 200MT, USDA Organic certified">🌾 ST25 Rice 200MT</button>
+          <button class="ai-suggest" data-msg="What is the current price for Robusta G1 coffee?">📊 Robusta price today</button>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <input type="text" class="ai-input" id="aiInput" placeholder="Describe what you want to source..." />
+        <button class="ai-send" id="aiSend">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
