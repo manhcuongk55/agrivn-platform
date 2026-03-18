@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVN — ERP Operations Dashboard</title>
+  <meta name="description" content="AgriVN ERP Operations — Sales Orders, Purchase Orders, Inventory, Finance" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="erp.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">AgriVN</span>
+        <span class="nav-badge">ERP <span class="erp-powered">× ERPNext</span></span>
+      </a>
+      <div class="erp-nav-tabs">
+        <button class="enav-tab active" data-tab="dashboard" id="tabDashboard">📊 Dashboard</button>
+        <button class="enav-tab" data-tab="sales" id="tabSales">💰 Sales Orders</button>
+        <button class="enav-tab" data-tab="purchase" id="tabPurchase">🚜 Purchase Orders</button>
+        <button class="enav-tab" data-tab="inventory" id="tabInventory">📦 Inventory</button>
+        <button class="enav-tab" data-tab="finance" id="tabFinance">🏦 Finance</button>
+      </div>
+      <div class="nav-right">
+        <div class="erp-connection" id="erpConnection">
+          <span class="erp-dot offline"></span>
+          <span class="erp-conn-text">Offline Mode</span>
+        </div>
+        <button class="erp-connect-btn" id="erpConnectBtn">Connect ERPNext</button>
+        <a href="admin.html" class="nav-back">Trade Desk →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- ========== DASHBOARD TAB ========== -->
+      <div class="tab-content active" id="panelDashboard">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Operations Dashboard</h1>
+            <p class="page-sub">Real-time overview of all trade operations</p>
+          </div>
+          <div class="dash-date" id="dashDate"></div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid" id="kpiGrid">
+          <div class="kpi-card">
+            <div class="kpi-icon">📦</div>
+            <div class="kpi-data">
+              <div class="kpi-num" id="kpiItems">—</div>
+              <div class="kpi-label">Active Listings</div>
+            </div>
+          </div>
+          <div class="kpi-card kpi-green">
+            <div class="kpi-icon">📋</div>
+            <div class="kpi-data">
+              <div class="kpi-num" id="kpiSO">—</div>
+              <div class="kpi-label">Sales Orders</div>
+            </div>
+            <div class="kpi-sub" id="kpiSOValue">—</div>
+          </div>
+          <div class="kpi-card kpi-gold">
+            <div class="kpi-icon">🚜</div>
+            <div class="kpi-data">
+              <div class="kpi-num" id="kpiPO">—</div>
+              <div class="kpi-label">Purchase Orders</div>
+            </div>
+            <div class="kpi-sub" id="kpiPOValue">—</div>
+          </div>
+          <div class="kpi-card kpi-red">
+            <div class="kpi-icon">🏦</div>
+            <div class="kpi-data">
+              <div class="kpi-num" id="kpiAR">—</div>
+              <div class="kpi-label">Outstanding Receivable</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">⏳</div>
+            <div class="kpi-data">
+              <div class="kpi-num" id="kpiPending">—</div>
+              <div class="kpi-label">Pending Orders</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENT ACTIVITY -->
+        <div class="dash-grid">
+          <div class="dash-section">
+            <h3 class="dash-section-title">Recent Sales Orders</h3>
+            <div class="dash-table-wrap" id="dashSOTable">
+              <div class="table-loading"><div class="loader"></div><span>Loading...</span></div>
+            </div>
+          </div>
+          <div class="dash-section">
+            <h3 class="dash-section-title">Recent Purchase Orders</h3>
+            <div class="dash-table-wrap" id="dashPOTable">
+              <div class="table-loading"><div class="loader"></div><span>Loading...</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SALES ORDERS TAB ========== -->
+      <div class="tab-content" id="panelSales">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Sales Orders</h1>
+            <p class="page-sub">Trade orders from international buyers</p>
+          </div>
+          <button class="btn-create" id="btnNewSO">+ New Sales Order</button>
+        </div>
+        <div class="table-wrap" id="soTableWrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Delivery</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="soTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- SO Form Modal -->
+        <div class="view-overlay" id="soFormOverlay">
+          <div class="view-modal" style="max-width:560px">
+            <button class="view-close" id="soFormClose">✕</button>
+            <h2 style="margin-bottom:20px">Create Sales Order</h2>
+            <form id="soForm">
+              <div class="field">
+                <label for="soCustomer">Customer <span class="req">*</span></label>
+                <input type="text" id="soCustomer" placeholder="e.g. Shanghai Import Co." required />
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="soDate">Order Date</label>
+                  <input type="date" id="soDate" />
+                </div>
+                <div class="field">
+                  <label for="soDelivery">Delivery Date</label>
+                  <input type="date" id="soDelivery" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Line Items</label>
+                <div class="line-items" id="soLineItems">
+                  <div class="line-item-row">
+                    <select class="line-item-select" id="soItemSelect">
+                      <option value="">Select product...</option>
+                    </select>
+                    <input type="number" class="line-qty" placeholder="Qty (MT)" id="soItemQty" min="1" />
+                    <input type="number" class="line-rate" placeholder="Rate $/MT" id="soItemRate" min="1" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-submit">Create Sales Order</button>
+                <button type="button" class="btn-cancel" id="soFormCancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== PURCHASE ORDERS TAB ========== -->
+      <div class="tab-content" id="panelPurchase">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Purchase Orders</h1>
+            <p class="page-sub">Sourcing orders to Vietnamese farms & cooperatives</p>
+          </div>
+          <button class="btn-create" id="btnNewPO">+ New Purchase Order</button>
+        </div>
+        <div class="table-wrap" id="poTableWrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>PO #</th>
+                <th>Supplier / Farm</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Region</th>
+                <th>Quality</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="poTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- PO Form Modal -->
+        <div class="view-overlay" id="poFormOverlay">
+          <div class="view-modal" style="max-width:560px">
+            <button class="view-close" id="poFormClose">✕</button>
+            <h2 style="margin-bottom:20px">Create Purchase Order</h2>
+            <form id="poForm">
+              <div class="field">
+                <label for="poSupplier">Supplier / Farm <span class="req">*</span></label>
+                <input type="text" id="poSupplier" placeholder="e.g. Dak Lak Coffex Farm" required />
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="poRegion">Farm Region</label>
+                  <input type="text" id="poRegion" placeholder="e.g. Dak Lak" />
+                </div>
+                <div class="field">
+                  <label for="poGrade">Quality Grade</label>
+                  <select id="poGrade">
+                    <option value="Grade A+">Grade A+</option>
+                    <option value="Grade A" selected>Grade A</option>
+                    <option value="Grade B">Grade B</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="poDate">Order Date</label>
+                  <input type="date" id="poDate" />
+                </div>
+                <div class="field">
+                  <label for="poSchedule">Schedule Date</label>
+                  <input type="date" id="poSchedule" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Line Items</label>
+                <div class="line-items">
+                  <div class="line-item-row">
+                    <select class="line-item-select" id="poItemSelect">
+                      <option value="">Select product...</option>
+                    </select>
+                    <input type="number" class="line-qty" placeholder="Qty (MT)" id="poItemQty" min="1" />
+                    <input type="number" class="line-rate" placeholder="Rate $/MT" id="poItemRate" min="1" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-submit">Create Purchase Order</button>
+                <button type="button" class="btn-cancel" id="poFormCancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== INVENTORY TAB ========== -->
+      <div class="tab-content" id="panelInventory">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Inventory & Stock</h1>
+            <p class="page-sub">Warehouse stock levels for all agricultural products</p>
+          </div>
+        </div>
+        <div class="table-wrap" id="stockTableWrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item Code</th>
+                <th>Product</th>
+                <th>Warehouse</th>
+                <th>Stock (MT)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="stockTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== FINANCE TAB ========== -->
+      <div class="tab-content" id="panelFinance">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Trade Finance</h1>
+            <p class="page-sub">Invoices, payments, and outstanding receivables</p>
+          </div>
+        </div>
+        <div class="fin-kpi-row">
+          <div class="fin-kpi">
+            <div class="fin-kpi-label">Total Invoiced</div>
+            <div class="fin-kpi-num" id="finTotal">—</div>
+          </div>
+          <div class="fin-kpi">
+            <div class="fin-kpi-label">Paid</div>
+            <div class="fin-kpi-num fin-green" id="finPaid">—</div>
+          </div>
+          <div class="fin-kpi">
+            <div class="fin-kpi-label">Outstanding</div>
+            <div class="fin-kpi-num fin-red" id="finOutstanding">—</div>
+          </div>
+        </div>
+        <div class="table-wrap" id="invoiceTableWrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Outstanding</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="invoiceTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ERPNext Connect Modal -->
+  <div class="view-overlay" id="connectOverlay">
+    <div class="view-modal" style="max-width:420px">
+      <button class="view-close" id="connectClose">✕</button>
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:2.5rem;margin-bottom:8px">🔗</div>
+        <h2>Connect to ERPNext</h2>
+        <p style="color:var(--text-secondary);font-size:0.85rem;margin-top:6px">Enter your ERPNext instance URL and credentials</p>
+      </div>
+      <form id="connectForm">
+        <div class="field">
+          <label for="erpUrl">ERPNext URL</label>
+          <input type="url" id="erpUrl" placeholder="https://your-site.erpnext.com" />
+        </div>
+        <div class="field">
+          <label for="erpUser">Email</label>
+          <input type="email" id="erpUser" placeholder="admin@company.com" />
+        </div>
+        <div class="field">
+          <label for="erpPass">Password</label>
+          <input type="password" id="erpPass" placeholder="••••••••" />
+        </div>
+        <div class="form-actions" style="flex-direction:column;gap:8px">
+          <button type="submit" class="btn-submit">Connect</button>
+          <button type="button" class="btn-cancel" id="connectCancel" style="width:100%">Continue in Offline Mode</button>
+        </div>
+        <p style="text-align:center;font-size:0.72rem;color:var(--text-muted);margin-top:12px">
+          Offline mode uses localStorage to simulate ERPNext. All CRUD operations fully functional.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="erpnext-api.js"></script>
+  <script src="erp.js"></script>
+</body>
+</html>
