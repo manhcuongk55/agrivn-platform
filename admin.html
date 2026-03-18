@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVN — Trade Desk (CRUD Admin)</title>
+  <meta name="description" content="AgriVN Trade Desk — Manage trade listings with full CRUD operations" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">AgriVN</span>
+        <span class="nav-badge">Trade Desk</span>
+      </a>
+      <div class="nav-right">
+        <span class="nav-user">👤 Admin</span>
+        <a href="index.html" class="nav-back">← Back to Marketplace</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- HEADER -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Trade Listings Manager</h1>
+          <p class="page-sub">Full CRUD — Create, Read, Update, Delete</p>
+        </div>
+        <button class="btn-create" id="btnCreate">+ New Listing</button>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-chip"><span class="stat-chip-num" id="statTotal">0</span> Total</div>
+        <div class="stat-chip"><span class="stat-chip-num" id="statCoffee">0</span> Coffee</div>
+        <div class="stat-chip"><span class="stat-chip-num" id="statDurian">0</span> Durian</div>
+        <div class="stat-chip"><span class="stat-chip-num" id="statRice">0</span> Rice</div>
+        <div class="stat-chip"><span class="stat-chip-num" id="statFruit">0</span> Fruits</div>
+      </div>
+
+      <!-- LAYOUT: FORM + TABLE -->
+      <div class="desk-layout">
+
+        <!-- FORM PANEL -->
+        <div class="form-panel" id="formPanel">
+          <div class="form-header">
+            <h2 class="form-title" id="formTitle">Create New Listing</h2>
+            <button class="form-close" id="formClose" title="Close form">✕</button>
+          </div>
+          <form id="listingForm" novalidate>
+            <!-- Hidden: editing ID -->
+            <input type="hidden" id="editId" value="" />
+
+            <div class="field">
+              <label for="fName">Product Name <span class="req">*</span></label>
+              <input type="text" id="fName" placeholder="e.g. Premium Robusta G1" required />
+              <span class="field-error" id="errName"></span>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="fCategory">Category <span class="req">*</span></label>
+                <select id="fCategory" required>
+                  <option value="">Select...</option>
+                  <option value="coffee">☕ Coffee</option>
+                  <option value="durian">🍈 Durian</option>
+                  <option value="rice">🌾 Rice</option>
+                  <option value="fruit">🥭 Fruit</option>
+                  <option value="cashew">🫘 Cashew</option>
+                  <option value="pepper">🌶️ Pepper</option>
+                </select>
+                <span class="field-error" id="errCategory"></span>
+              </div>
+              <div class="field">
+                <label for="fRegion">Region <span class="req">*</span></label>
+                <input type="text" id="fRegion" placeholder="e.g. Dak Lak, Vietnam" required />
+                <span class="field-error" id="errRegion"></span>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="fPrice">Price ($/MT) <span class="req">*</span></label>
+                <input type="number" id="fPrice" placeholder="e.g. 2340" min="1" required />
+                <span class="field-error" id="errPrice"></span>
+              </div>
+              <div class="field">
+                <label for="fQuantity">Available (MT) <span class="req">*</span></label>
+                <input type="number" id="fQuantity" placeholder="e.g. 240" min="1" required />
+                <span class="field-error" id="errQuantity"></span>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="fMinOrder">Min Order (MT)</label>
+                <input type="number" id="fMinOrder" placeholder="e.g. 5" min="1" />
+              </div>
+              <div class="field">
+                <label for="fCert">Certification</label>
+                <input type="text" id="fCert" placeholder="e.g. UTZ, Organic" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="fSeller">Seller / Farm Name <span class="req">*</span></label>
+              <input type="text" id="fSeller" placeholder="e.g. Dak Lak Coffex" required />
+              <span class="field-error" id="errSeller"></span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-submit" id="btnSubmit">
+                <span class="btn-submit-text">Create Listing</span>
+                <span class="btn-submit-loading" style="display:none">Saving...</span>
+              </button>
+              <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- TABLE PANEL -->
+        <div class="table-panel">
+          <!-- Search & Filter -->
+          <div class="table-toolbar">
+            <div class="search-wrap">
+              <span class="search-ico">🔍</span>
+              <input type="text" id="searchInput" placeholder="Search listings..." />
+            </div>
+            <div class="filter-wrap">
+              <select id="filterCategory">
+                <option value="">All Categories</option>
+                <option value="coffee">Coffee</option>
+                <option value="durian">Durian</option>
+                <option value="rice">Rice</option>
+                <option value="fruit">Fruit</option>
+                <option value="cashew">Cashew</option>
+                <option value="pepper">Pepper</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div class="table-loading" id="tableLoading">
+            <div class="loader"></div>
+            <span>Loading listings...</span>
+          </div>
+
+          <!-- Empty State -->
+          <div class="table-empty" id="tableEmpty" style="display:none">
+            <div class="empty-icon">📋</div>
+            <h3>No listings yet</h3>
+            <p>Click "New Listing" to create your first trade listing</p>
+            <button class="btn-create-small" id="btnCreateEmpty">+ Create First Listing</button>
+          </div>
+
+          <!-- Data Table -->
+          <div class="table-wrap" id="tableWrap" style="display:none">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Region</th>
+                  <th>Price</th>
+                  <th>Avail.</th>
+                  <th>Seller</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer" id="tableFooter" style="display:none">
+            <span class="table-count" id="tableCount">0 listings</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- VIEW MODAL -->
+  <div class="view-overlay" id="viewOverlay">
+    <div class="view-modal" id="viewModal">
+      <button class="view-close" id="viewClose">✕</button>
+      <div class="view-content" id="viewContent">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box" id="confirmBox">
+      <div class="confirm-icon">⚠️</div>
+      <h3>Delete Listing?</h3>
+      <p>This action cannot be undone. The listing "<strong id="confirmName"></strong>" will be permanently removed.</p>
+      <div class="confirm-actions">
+        <button class="btn-confirm-delete" id="btnConfirmDelete">Delete</button>
+        <button class="btn-confirm-cancel" id="btnConfirmCancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
