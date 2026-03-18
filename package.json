@@ -1,0 +1,30 @@
+{
+  "name": "agrivn-platform",
+  "version": "1.0.0",
+  "description": "AgriVN — Vietnam's B2B Agricultural Export Platform with ERPNext Integration",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 4200",
+    "start": "npx serve . -l 4200",
+    "deploy": "npx vercel --prod"
+  },
+  "keywords": [
+    "agritech",
+    "b2b-marketplace",
+    "erpnext",
+    "vietnam",
+    "agricultural-exports",
+    "coffee",
+    "durian",
+    "rice",
+    "supply-chain",
+    "trade-finance"
+  ],
+  "author": "AgriVN Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manhcuongk55/agrivn-platform"
+  },
+  "homepage": "https://agrivn-platform.vercel.app"
+}
