@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>AgriVN × OpenClaw — AI Agent Integration</title>
+  <meta name="description" content="Connect OpenClaw AI agent to AgriVN actors — Farmer (Zalo), Buyer (Telegram/WhatsApp), Logistics (Slack), Admin (Discord)"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--g:#22a463;--gd:#1a7a4c;--gg:rgba(34,164,99,0.35);--gold:#e8a020;--or:#e87830;--bl:#4a9ade;--pu:#7c5cbf;--bg:#080e0a;--card:#111d15;--card2:#0d1910;--border:rgba(34,164,99,0.12);--bh:rgba(34,164,99,0.35);--t1:#f0f7f2;--t2:#8bab96;--tm:#4a6655;--font:'Plus Jakarta Sans',sans-serif;--mono:'JetBrains Mono',monospace;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font);background:var(--bg);color:var(--t1);line-height:1.6;min-height:100vh;}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:100;background:rgba(8,14,10,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:60px;}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--t1);font-weight:800;font-size:1rem;}
+    .logo-g{background:linear-gradient(90deg,#22a463,#f5bc47);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .nav-x{color:var(--tm);font-size:1.1rem;font-weight:300;}
+    .nav-oc{color:#ff6b6b;font-weight:800;}
+    .nav-badge{background:rgba(124,92,191,0.12);border:1px solid rgba(124,92,191,0.3);color:#a07de0;padding:2px 10px;border-radius:6px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+    .nav-links{list-style:none;display:flex;gap:8px;}
+    .nav-link{text-decoration:none;color:var(--t2);font-size:0.82rem;padding:6px 14px;border-radius:8px;transition:all 0.2s;font-weight:500;}
+    .nav-link:hover{color:var(--t1);background:rgba(34,164,99,0.08);}
+    .nav-back{text-decoration:none;font-size:0.8rem;color:var(--tm);padding:6px 14px;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
+    .nav-back:hover{color:var(--t1);border-color:var(--bh);}
+
+    /* HERO */
+    .hero{text-align:center;padding:72px 0 48px;position:relative;}
+    .hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(124,92,191,0.07) 0%,rgba(34,164,99,0.05) 50%,transparent 70%);pointer-events:none;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,92,191,0.08);border:1px solid rgba(124,92,191,0.2);padding:6px 16px;border-radius:20px;font-size:0.75rem;color:#a07de0;font-weight:600;margin-bottom:20px;}
+    .hero-title{font-size:2.4rem;font-weight:800;line-height:1.2;margin-bottom:14px;}
+    .hero-sub{color:var(--t2);font-size:0.95rem;max-width:620px;margin:0 auto;}
+
+    /* SECTION */
+    .section{margin-bottom:56px;}
+    .section-title{text-align:center;font-size:1.2rem;font-weight:800;margin-bottom:8px;}
+    .section-sub{text-align:center;color:var(--tm);font-size:0.82rem;margin-bottom:28px;}
+
+    /* ACTORS GRID */
+    .actors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+    .actor-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;transition:all 0.3s;position:relative;overflow:hidden;}
+    .actor-card:hover{transform:translateY(-4px);}
+    .actor-card.farmer{border-color:rgba(34,164,99,0.25);}
+    .actor-card.farmer:hover{border-color:rgba(34,164,99,0.45);}
+    .actor-card.buyer{border-color:rgba(74,154,222,0.25);}
+    .actor-card.buyer:hover{border-color:rgba(74,154,222,0.45);}
+    .actor-card.logistics{border-color:rgba(232,120,48,0.25);}
+    .actor-card.logistics:hover{border-color:rgba(232,120,48,0.45);}
+    .actor-card.admin{border-color:rgba(124,92,191,0.25);}
+    .actor-card.admin:hover{border-color:rgba(124,92,191,0.45);}
+    .actor-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity 0.3s;}
+    .actor-card.farmer::before{background:linear-gradient(90deg,var(--gd),var(--g));}.actor-card.farmer:hover::before{opacity:1;}
+    .actor-card.buyer::before{background:linear-gradient(90deg,#2e6da4,var(--bl));}.actor-card.buyer:hover::before{opacity:1;}
+    .actor-card.logistics::before{background:linear-gradient(90deg,#c45a1a,var(--or));}.actor-card.logistics:hover::before{opacity:1;}
+    .actor-card.admin::before{background:linear-gradient(90deg,#5c3fa0,var(--pu));}.actor-card.admin:hover::before{opacity:1;}
+    .actor-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+    .actor-icon{font-size:2rem;width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .actor-card.farmer .actor-icon{background:rgba(34,164,99,0.08);}
+    .actor-card.buyer .actor-icon{background:rgba(74,154,222,0.08);}
+    .actor-card.logistics .actor-icon{background:rgba(232,120,48,0.08);}
+    .actor-card.admin .actor-icon{background:rgba(124,92,191,0.08);}
+    .actor-name{font-size:1rem;font-weight:800;}
+    .actor-tagline{font-size:0.72rem;color:var(--tm);margin-top:2px;}
+    .channels-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+    .ch-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:6px;font-size:0.68rem;font-weight:700;border:1px solid;}
+    .ch-zalo{background:rgba(0,110,255,0.08);border-color:rgba(0,110,255,0.2);color:#5599ff;}
+    .ch-telegram{background:rgba(37,161,219,0.08);border-color:rgba(37,161,219,0.2);color:#25a1db;}
+    .ch-whatsapp{background:rgba(37,211,102,0.08);border-color:rgba(37,211,102,0.2);color:#25d366;}
+    .ch-slack{background:rgba(74,21,75,0.08);border-color:rgba(74,21,75,0.2);color:#e01e5a;}
+    .ch-discord{background:rgba(88,101,242,0.08);border-color:rgba(88,101,242,0.2);color:#5865f2;}
+    .actor-tools{list-style:none;}
+    .actor-tools li{padding:3px 0;font-size:0.78rem;color:var(--t2);display:flex;align-items:center;gap:6px;}
+    .tl{font-family:var(--mono);font-size:0.68rem;color:var(--g);background:rgba(34,164,99,0.06);padding:1px 6px;border-radius:4px;}
+    .actor-lang{position:absolute;top:16px;right:16px;font-size:0.65rem;font-weight:700;padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.04);color:var(--tm);}
+
+    /* SETUP STEPS */
+    .setup-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:32px;max-width:800px;margin:0 auto;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.04);position:relative;}
+    .step:last-child{border-bottom:none;}
+    .step-num{width:36px;height:36px;border-radius:50%;background:rgba(34,164,99,0.1);border:1px solid rgba(34,164,99,0.25);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;color:var(--g);flex-shrink:0;margin-top:2px;}
+    .step-content{}
+    .step-title{font-size:0.95rem;font-weight:800;margin-bottom:6px;}
+    .step-desc{font-size:0.82rem;color:var(--t2);line-height:1.6;margin-bottom:10px;}
+    .code-block{background:var(--card2);border:1px solid rgba(34,164,99,0.1);border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:0.78rem;color:#c8e6d0;overflow-x:auto;position:relative;}
+    .code-block .comment{color:var(--tm);}
+    .code-block .keyword{color:var(--g);}
+    .code-block .str{color:#f5bc47;}
+    .copy-btn{position:absolute;top:10px;right:10px;padding:4px 10px;border-radius:6px;font-size:0.65rem;font-weight:700;font-family:var(--font);cursor:pointer;background:rgba(34,164,99,0.1);border:1px solid rgba(34,164,99,0.2);color:var(--g);transition:all 0.2s;}
+    .copy-btn:hover{background:rgba(34,164,99,0.2);}
+    .step-note{font-size:0.72rem;color:var(--tm);display:flex;align-items:flex-start;gap:6px;margin-top:6px;padding:8px 12px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.1);border-radius:8px;}
+
+    /* LIVE TEST */
+    .test-section{margin-bottom:56px;}
+    .test-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;max-width:800px;margin:0 auto;}
+    .test-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .test-actor-sel{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .actor-btn{padding:8px 18px;border-radius:9px;font-size:0.78rem;font-weight:700;font-family:var(--font);cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:all 0.2s;}
+    .actor-btn.active{background:rgba(34,164,99,0.12);border-color:rgba(34,164,99,0.3);color:var(--g);}
+    .actor-btn:hover{border-color:var(--bh);color:var(--t1);}
+    .chat-window{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;min-height:280px;max-height:400px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;}
+    .msg{display:flex;gap:10px;align-items:flex-start;}
+    .msg-ava{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .msg-ava.user{background:rgba(34,164,99,0.1);}
+    .msg-ava.bot{background:rgba(124,92,191,0.1);}
+    .msg.user{flex-direction:row-reverse;}
+    .msg-bubble{padding:10px 14px;border-radius:12px;font-size:0.82rem;line-height:1.6;max-width:75%;}
+    .msg.user .msg-bubble{background:rgba(34,164,99,0.1);border:1px solid rgba(34,164,99,0.15);border-top-right-radius:4px;}
+    .msg.bot .msg-bubble{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-top-left-radius:4px;}
+    .msg-time{font-size:0.65rem;color:var(--tm);margin-top:3px;}
+    .typing{display:flex;align-items:center;gap:4px;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;border-top-left-radius:4px;display:none;}
+    .typing span{width:6px;height:6px;border-radius:50%;background:var(--tm);animation:bounce 1.2s infinite;}
+    .typing span:nth-child(2){animation-delay:0.2s;}
+    .typing span:nth-child(3){animation-delay:0.4s;}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+    .chat-input-row{display:flex;gap:8px;}
+    .chat-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--t1);padding:11px 14px;border-radius:10px;font-size:0.85rem;font-family:var(--font);outline:none;transition:border-color 0.2s;}
+    .chat-input:focus{border-color:var(--g);}
+    .chat-send{padding:11px 20px;background:linear-gradient(135deg,var(--gd),var(--g));border:none;color:#fff;border-radius:10px;font-family:var(--font);font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
+    .chat-send:hover{box-shadow:0 4px 14px var(--gg);}
+    .quick-msgs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+    .qm{padding:5px 12px;border-radius:8px;font-size:0.72rem;font-weight:600;font-family:var(--font);cursor:pointer;background:rgba(34,164,99,0.06);border:1px solid rgba(34,164,99,0.12);color:var(--t2);transition:all 0.2s;}
+    .qm:hover{background:rgba(34,164,99,0.12);color:var(--t1);}
+
+    /* TOAST */
+    .toast-container{position:fixed;bottom:24px;right:24px;z-index:5000;display:flex;flex-direction:column;gap:10px;}
+
+    /* RESPONSIVE */
+    @media(max-width:800px){
+      .actors-grid{grid-template-columns:1fr;}
+      .hero-title{font-size:1.7rem;}
+      .nav-links{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span>🌿</span>
+        <span class="logo-g">AgriVN</span>
+        <span class="nav-x">×</span>
+        <span class="nav-oc">🦞 OpenClaw</span>
+        <span class="nav-badge">AI Agent</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Marketplace</a></li>
+        <li><a href="farmer.html" class="nav-link">FarmerOS</a></li>
+        <li><a href="fulfillment.html" class="nav-link">Fulfillment</a></li>
+        <li><a href="supplychain.html" class="nav-link">Supply Chain</a></li>
+      </ul>
+      <a href="index.html" class="nav-back">← Back to Platform</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">🦞 Powered by OpenClaw — Any Channel, Any Actor</div>
+      <h1 class="hero-title">
+        AgriVN AI Agents on<br/>
+        <span style="color:var(--g)">Zalo</span> · <span style="color:#25a1db">Telegram</span> · <span style="color:#25d366">WhatsApp</span> · <span style="color:#e01e5a">Slack</span>
+      </h1>
+      <p class="hero-sub">OpenClaw connects our platform actors to the messaging channels your farmers and buyers already use — Zalo for Vietnamese farmers, Telegram/WhatsApp for global buyers, Slack for trade desk operators.</p>
+    </section>
+
+    <!-- ACTORS -->
+    <section class="section">
+      <h2 class="section-title">🤖 AgriVN Actors — Powered by OpenClaw</h2>
+      <p class="section-sub">4 purpose-built AI actors, each with their own channel, language, and toolset</p>
+      <div class="actors-grid">
+
+        <!-- FARMER -->
+        <div class="actor-card farmer">
+          <span class="actor-lang">🇻🇳 Tiếng Việt</span>
+          <div class="actor-header">
+            <div class="actor-icon">👨‍🌾</div>
+            <div>
+              <div class="actor-name">Farmer Agent</div>
+              <div class="actor-tagline">Trợ lý nông dân — nhận đơn, đăng hàng, kết nối xưởng</div>
+            </div>
+          </div>
+          <div class="channels-row">
+            <span class="ch-tag ch-zalo">🇻🇳 Zalo</span>
+            <span class="ch-tag ch-zalo">Zalo Personal</span>
+            <span class="ch-tag ch-telegram">Telegram</span>
+          </div>
+          <ul class="actor-tools">
+            <li><span class="tl">agrivn_receive_order</span> Nhận & xác nhận đơn hàng</li>
+            <li><span class="tl">agrivn_update_stock</span> Cập nhật tồn kho</li>
+            <li><span class="tl">agrivn_find_factory</span> Tìm xưởng gia công</li>
+            <li><span class="tl">agrivn_create_quote</span> Tạo báo giá FOB</li>
+          </ul>
+        </div>
+
+        <!-- BUYER -->
+        <div class="actor-card buyer">
+          <span class="actor-lang">🌍 English</span>
+          <div class="actor-header">
+            <div class="actor-icon">🌍</div>
+            <div>
+              <div class="actor-name">Buyer Agent</div>
+              <div class="actor-tagline">Global importer sourcing — search, quote, track, finance</div>
+            </div>
+          </div>
+          <div class="channels-row">
+            <span class="ch-tag ch-telegram">Telegram</span>
+            <span class="ch-tag ch-whatsapp">WhatsApp</span>
+            <span class="ch-tag ch-slack">Slack</span>
+          </div>
+          <ul class="actor-tools">
+            <li><span class="tl">agrivn_search_produce</span> Search products by type, cert, volume</li>
+            <li><span class="tl">agrivn_get_quote</span> FOB + shipping quote</li>
+            <li><span class="tl">agrivn_check_farm_profile</span> Trust score + lab results</li>
+            <li><span class="tl">agrivn_track_shipment</span> Live GPS tracking</li>
+            <li><span class="tl">agrivn_apply_finance</span> Pre-shipment loan application</li>
+          </ul>
+        </div>
+
+        <!-- LOGISTICS -->
+        <div class="actor-card logistics">
+          <span class="actor-lang">🚢 English</span>
+          <div class="actor-header">
+            <div class="actor-icon">🚢</div>
+            <div>
+              <div class="actor-name">Logistics Agent</div>
+              <div class="actor-tagline">Container booking, cold chain, customs alerts</div>
+            </div>
+          </div>
+          <div class="channels-row">
+            <span class="ch-tag ch-telegram">Telegram</span>
+            <span class="ch-tag ch-slack">Slack</span>
+          </div>
+          <ul class="actor-tools">
+            <li><span class="tl">agrivn_quote_shipping</span> Route + container pricing</li>
+            <li><span class="tl">agrivn_book_container</span> FCL/LCL booking</li>
+            <li><span class="tl">agrivn_track_shipment</span> Real-time position + ETA</li>
+            <li><span class="tl">agrivn_cold_chain_alert</span> Temperature breach alerts</li>
+            <li><span class="tl">agrivn_customs_checklist</span> Required docs list</li>
+          </ul>
+        </div>
+
+        <!-- ADMIN -->
+        <div class="actor-card admin">
+          <span class="actor-lang">📋 English</span>
+          <div class="actor-header">
+            <div class="actor-icon">📋</div>
+            <div>
+              <div class="actor-name">Trade Desk Admin</div>
+              <div class="actor-tagline">Daily summaries, ERP sync, escalation alerts</div>
+            </div>
+          </div>
+          <div class="channels-row">
+            <span class="ch-tag ch-slack">Slack</span>
+            <span class="ch-tag ch-discord">Discord</span>
+          </div>
+          <ul class="actor-tools">
+            <li><span class="tl">agrivn_daily_summary</span> GMV, orders, new farmers</li>
+            <li><span class="tl">agrivn_pending_approvals</span> Farm verifications pending</li>
+            <li><span class="tl">agrivn_erp_sync_status</span> ERPNext sync health</li>
+            <li><span class="tl">agrivn_revenue_report</span> Weekly revenue by stream</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SETUP STEPS -->
+    <section class="section">
+      <h2 class="section-title">⚙️ Setup Guide</h2>
+      <p class="section-sub">Get all 4 actors running in 4 steps</p>
+      <div class="setup-card">
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-title">Install OpenClaw</div>
+              <div class="step-desc">Run the OpenClaw onboarding wizard. It guides you through setting up the gateway, connecting channels, and adding skills.</div>
+              <div class="code-block" id="code1">
+<span class="comment"># Install and run interactively</span>
+<span class="keyword">npx</span> openclaw onboard
+
+<span class="comment"># Or install globally</span>
+<span class="keyword">npm install</span> -g openclaw
+openclaw onboard
+                <button class="copy-btn" onclick="copyCode('code1')">copy</button>
+              </div>
+              <div class="step-note">ℹ️ Requires Node.js 18+. Works on macOS, Linux, and Windows (WSL2).</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-title">Add AgriVN Skills to OpenClaw Config</div>
+              <div class="step-desc">Register the AgriVN skills file with your OpenClaw gateway. This gives each actor access to AgriVN's tools.</div>
+              <div class="code-block" id="code2">
+<span class="comment"># Add to ~/.openclaw/config.yaml</span>
+skills:
+  - path: <span class="str">./openclaw-skills.js</span>
+    name: <span class="str">agrivn</span>
+
+actors:
+  farmer:
+    channels: [<span class="str">zalo</span>, <span class="str">telegram</span>]
+    language: <span class="str">vi</span>
+    skill: <span class="str">agrivn</span>
+  buyer:
+    channels: [<span class="str">telegram</span>, <span class="str">whatsapp</span>]
+    language: <span class="str">en</span>
+    skill: <span class="str">agrivn</span>
+  logistics:
+    channels: [<span class="str">telegram</span>, <span class="str">slack</span>]
+    skill: <span class="str">agrivn</span>
+  admin:
+    channels: [<span class="str">slack</span>, <span class="str">discord</span>]
+    skill: <span class="str">agrivn</span>
+                <button class="copy-btn" onclick="copyCode('code2')">copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-title">Connect Channels</div>
+              <div class="step-desc">Add the channels your farmers and buyers already use. Zalo is critical for Vietnamese farmers — OpenClaw supports both Zalo Business and Zalo Personal.</div>
+              <div class="code-block" id="code3">
+<span class="comment"># Zalo (for Vietnamese farmers)</span>
+openclaw channel add zalo --actor farmer
+
+<span class="comment"># Telegram (for global buyers)</span>
+openclaw channel add telegram --actor buyer
+
+<span class="comment"># WhatsApp (for global buyers)</span>
+openclaw channel add whatsapp --actor buyer
+
+<span class="comment"># Slack (for logistics + admin team)</span>
+openclaw channel add slack --actor logistics
+openclaw channel add slack --actor admin
+                <button class="copy-btn" onclick="copyCode('code3')">copy</button>
+              </div>
+              <div class="step-note">ℹ️ For Zalo: you need a Zalo OA (Official Account) or use Zalo Personal with the OpenClaw Zalo bridge.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-title">Connect to AgriVN + ERPNext</div>
+              <div class="step-desc">Set the environment variables so OpenClaw agents can call your AgriVN API and ERPNext instance for live data.</div>
+              <div class="code-block" id="code4">
+<span class="comment"># Add to .env (or export in your shell)</span>
+AGRIVN_API_BASE=<span class="str">https://agrivn-platform.vercel.app</span>
+ERPNEXT_URL=<span class="str">https://your-erp.erpnext.com</span>
+ERPNEXT_API_KEY=<span class="str">your_api_key_here</span>
+ERPNEXT_API_SECRET=<span class="str">your_api_secret_here</span>
+
+<span class="comment"># Start the gateway</span>
+openclaw start
+
+<span class="comment"># Verify actors are registered</span>
+openclaw status
+                <button class="copy-btn" onclick="copyCode('code4')">copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE TEST CHAT -->
+    <section class="test-section">
+      <h2 class="section-title">💬 Test Agent Responses</h2>
+      <p class="section-sub">Preview how each actor responds — same AI, different role and language</p>
+      <div class="test-card">
+        <div class="test-header">
+          <div style="font-size:1.5rem">🤖</div>
+          <div>
+            <div style="font-size:0.9rem;font-weight:800;">AgriVN Agent Simulator</div>
+            <div style="font-size:0.72rem;color:var(--tm);">Test locally before connecting real channels</div>
+          </div>
+        </div>
+
+        <div class="test-actor-sel">
+          <button class="actor-btn active" data-actor="farmer" onclick="setActor('farmer', this)">👨‍🌾 Farmer (Zalo)</button>
+          <button class="actor-btn" data-actor="buyer" onclick="setActor('buyer', this)">🌍 Buyer (Telegram)</button>
+          <button class="actor-btn" data-actor="logistics" onclick="setActor('logistics', this)">🚢 Logistics (Slack)</button>
+          <button class="actor-btn" data-actor="admin" onclick="setActor('admin', this)">📋 Trade Desk</button>
+        </div>
+
+        <div class="quick-msgs" id="quickMsgs"></div>
+
+        <div class="chat-window" id="chatWindow">
+          <div class="msg bot">
+            <div class="msg-ava bot">🌿</div>
+            <div>
+              <div class="msg-bubble">Xin chào! Tôi là AgriVN Farmer Assistant 👨‍🌾<br/>Tôi có thể giúp bạn đăng nguyên liệu, nhận đơn đặt hàng từ nước ngoài, và tìm xưởng gia công gần nhất. Bạn cần gì không?</div>
+              <div class="msg-time">Now — Farmer Actor (Zalo)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg bot" id="typingIndicator" style="display:none;padding:0 0 10px;">
+          <div class="msg-ava bot">🌿</div>
+          <div class="typing" style="display:flex;">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="chat-input-row">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Type a message or click a quick prompt above..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+          <button class="chat-send" onclick="sendMsg()">Send ↗</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+  <style>@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}</style>
+
+  <script>
+    // ============================
+    // ACTOR CONFIG
+    // ============================
+    const ACTORS = {
+      farmer: {
+        icon: '👨‍🌾',
+        channel: 'Zalo',
+        quick: ['Tôi có 50 tấn cà phê Robusta', 'Tìm xưởng chế biến cà phê gần Đắk Lắk', 'Có đơn đặt hàng mới không?', 'Báo giá FOB cho 20 tấn đi Shanghai'],
+        responses: {
+          'cà phê': '☕ Tuyệt! 50 tấn Robusta G1 từ trang trại của bạn, phải không? Tôi sẽ đăng lên AgriVN ngay.\n\n📦 Thông tin đã lưu:\n• Sản phẩm: Robusta G1 screen 16+\n• Khối lượng: 50 MT\n• Giá FOB gợi ý: $2.80–$3.10/kg\n\nBạn có chứng nhận UTZ hoặc VietGAP không? Điều đó tăng giá thêm 10–15% đấy! 🏅',
+          'xưởng': '🏭 Đang tìm xưởng chế biến cà phê gần Đắk Lắk...\n\n✅ Kết quả match tốt nhất:\n1. **Đắk Lắk Coffee Processing** — 96% match\n   📍 Buôn Ma Thuột · 500 MT/tháng · ISO 22000\n\n2. **Cà phê Arabica Premium Plant** — 88% match\n   📍 Lâm Đồng · 200 MT/tháng · HACCP\n\nBạn muốn tôi kết nối với xưởng số 1 không?',
+          'đơn': '📋 Có 2 đơn hàng mới trong hôm nay:\n\n1. 🇩🇪 **Hamburg Coffee GmbH** — 20 MT Robusta G1\n   FOB $3.05/kg · Ship cuối tháng 3\n\n2. 🇰🇷 **Seoul Brew Company** — 5 MT Arabica SL28\n   FOB $6.20/kg · Cần mẫu 2kg trước\n\nBạn muốn xác nhận đơn nào không?',
+          'báo giá': '📊 Báo giá FOB cho 20 MT Robusta đi Shanghai:\n\n• Cước biển: $2,800 (1 container 20\')\n• Phí hải quan + xử lý: $140\n• Bảo hiểm hàng hải: $56\n\n**Tổng: ~$2,996 USD**\n\nThời gian transit: 5–7 ngày. Bạn muốn tôi gửi báo giá chính thức không? 📄',
+          default: 'Xin chào! 👋 Tôi hiểu bạn đang hỏi về sản phẩm nông nghiệp. Bạn có thể cho tôi biết:\n\n• Bạn đang có loại nguyên liệu gì?\n• Khối lượng dự kiến bao nhiêu tấn?\n• Bạn cần tìm xưởng gia công hay đã có người mua rồi?\n\nTôi sẽ giúp bạn kết nối ngay! 🌿',
+        },
+      },
+      buyer: {
+        icon: '🌍',
+        channel: 'Telegram',
+        quick: ['Find Robusta Grade 1 coffee 50MT UTZ certified', 'Quote shipping HCMC to Hamburg 1 container', 'Check trust score for HTX Cafe Dak Lak', 'Apply for $100K pre-shipment finance'],
+        responses: {
+          'robusta': '☕ **Search Results — Robusta G1 Vietnam**\n\n🥇 HTX Cà Phê Buôn Ma Thuột\n• Volume: 240 MT/season ✅\n• Price: $2.80–$3.10/kg FOB HCMC\n• Certs: UTZ ✓, ISO 22000 ✓, VietGAP ✓\n• Trust Score: **96/100**\n• Available: In Stock 🟢\n\n📦 Min order: 5 MT. Sample (500g) available.\n\nShall I get you a full FOB quote and book a sample?',
+          'hamburg': '🚢 **Shipping Quote — HCMC → Hamburg**\n\n• Route: Cat Lai Port → Hamburg\n• Container: 20\' Dry FCL\n• Ocean Freight: **$4,200**\n• Customs & Handling: $210\n• Marine Insurance: $84\n\n**Total: ~$4,494 USD per container**\n\n⏱️ Transit: 28–30 days\n🌡️ Reefer available: +$2,200/container\n\nReady to book? I can reserve a slot this week.',
+          'trust': '🔐 **Farm Profile — HTX Cà Phê Buôn Ma Thuột**\n\n✅ AgriVN Verified (March 2026 inspection)\n⭐ Trust Score: **96/100**\n\n🏅 Certifications:\n• UTZ Certified (Rainforest Alliance)\n• ISO 22000:2018\n• USDA Organic\n• Fairtrade\n• VietGAP\n\n🔬 Latest lab test: SGS — Aflatoxin <4ppb ✓\n📍 Location: Cư M\'gar District, Đắk Lắk\n⭐ 38 buyers · 4.9/5 rating\n\nView full profile: agrivn-platform.vercel.app/farmer.html',
+          'finance': '💳 **Trade Finance Application**\n\nPre-Shipment Finance: $100,000\n• APR: **8.5%**\n• Monthly payment: $708\n• Term options: 3 / 6 / 9 months\n\nApplication ID: **FIN-AGV-2026-0391**\n\n📋 Required docs:\n• Sales contract / Purchase Order\n• Farm certification (UTZ/Organic)\n• Company registration\n\nOur trade finance team will review within 24–48 hours. Need faster? Reply URGENT.',
+          default: 'Hello! I\'m the AgriVN Buyer Agent 🌍\n\nI can help you:\n• 🔍 Search Vietnamese produce (coffee, durian, rice, cashew...)\n• 💰 Get FOB prices + shipping quotes to 48 countries\n• ✅ Check farm trust scores and lab results\n• 📦 Book samples before container commitment\n• 🚢 Track your shipments live\n• 💳 Apply for trade finance\n\nWhat are you looking to source today?',
+        },
+      },
+      logistics: {
+        icon: '🚢',
+        channel: 'Slack',
+        quick: ['Quote HCMC to Tokyo 1 reefer container', 'Track shipment AGV-2026-0847', 'Customs documents checklist for Germany', 'Cold chain alert threshold settings'],
+        responses: {
+          'tokyo': '🚢 **Shipping Quote — HCMC → Tokyo**\n\n📦 Container: 20\' Reefer\n🏭 Origin: Cat Lai Port, HCMC\n🎯 Destination: Tokyo Port, Japan\n\n💰 Cost Breakdown:\n• Ocean Freight: $5,000 (base $3,200 + reefer $1,800)\n• Customs & Handling: $250\n• Marine Insurance: $100\n\n**Total: $5,350 USD**\n\n⏱️ Transit: 6–8 days\n🌡️ Temperature: configurable -18°C to +5°C\n\nBook this route? Next available slot: March 22.',
+          'track': '📍 **Shipment Status — AGV-2026-0847**\n\nStatus: 🟡 **IN TRANSIT**\nVessel: M/V Ever Green\nContainer: AGVU-2468135\n\nCurrent: South China Sea 15.4°N, 112.8°E\n🌡️ Temperature: 12.4°C ✅ (within spec)\n\n📅 Timeline:\n✅ Departed: Mar 14 — Cat Lai Port\n🔄 En route: Mar 14–19\n⏳ ETA: **Mar 19, 2026**\n\nNext update in 4 hours. Set alert? Reply ALERT.',
+          'customs': '📄 **Customs Docs Checklist — Export to Germany**\n\n✅ Required:\n1. Commercial Invoice (3 originals)\n2. Packing List\n3. Bill of Lading / AWB\n4. Certificate of Origin (Form A or EUR.1)\n5. Phytosanitary Certificate (Ministry of Agriculture)\n6. Fumigation Certificate\n7. Health Certificate (for food products)\n\n🇪🇺 EU-specific:\n8. EUR.1 (preferential tariff under EVFTA)\n9. SPS pre-notification (TRACES system)\n\nAgriVN Trade Desk generates all of these automatically. Reply YES to auto-generate.',
+          'cold': '🌡️ **Cold Chain Alert Settings — AGVU-2468135**\n\nCurrent settings:\n• Max temp: 12°C 🟡 (breach at 12.4°C — warning)\n• Min temp: 8°C\n• Alert channels: Slack #logistics, Telegram @logistics_bot\n\nActions:\n1. Notify shipping line to adjust reefer set-point ✅\n2. Log temperature excursion in ERP\n3. Notify buyer (email + Telegram)\n\nCurrent breach: 12.4°C at 09:14 ICT. Duration: 18 min. Within acceptable range.',
+          default: 'Hello! AgriVN Logistics Agent here 🚢\n\nI handle:\n• 📊 Shipping quotes (8 routes, 4 container types)\n• 📦 FCL/LCL container booking\n• 📍 Real-time GPS tracking\n• 🌡️ Cold chain temperature monitoring\n• 📄 Customs document generation\n• ⚠️ Exception alerts (delays, temperature, port holds)\n\nWhat do you need?',
+        },
+      },
+      admin: {
+        icon: '📋',
+        channel: 'Slack',
+        quick: ['Daily summary March 20', 'List pending farm verifications', 'ERPNext sync status', 'Revenue report this week'],
+        responses: {
+          'daily': '📊 **Daily Summary — March 20, 2026**\n\n💰 GMV Today: **$142,800**\n📦 Orders placed: **7** (↑2 vs yesterday)\n👨‍🌾 New farmers onboarded: **3**\n🚢 Active shipments: **12**\n💳 Finance disbursed: **$85,000**\n\n🏆 Top product: Robusta G1 Coffee (3 orders)\n\n⚠️ Alerts:\n• Shipment AGV-0821: temp 14.2°C (max 12°C)\n• HTX Sầu riêng Cai Lậy: verification pending 48h',
+          'verification': '✅ **Pending Farm Verifications**\n\n2 farms awaiting approval:\n\n1. 🌾 Vườn Sầu Riêng Tiền Giang\n   Submitted: Mar 18 · Documents: 4/6 ✅\n   Missing: Lab test (SGS) + UTZ cert copy\n   Action needed: Request docs from farmer\n\n2. 🌶️ Hộ Trồng Tiêu Gia Lai\n   Submitted: Mar 19 · Documents: 5/6 ✅  \n   Missing: GPS field survey photo\n   Action needed: Field agent visit scheduled Mar 22',
+          'erp': '⚙️ **ERPNext Sync Status**\n\nLast sync: 5 minutes ago ✅\n\n📊 Sync Summary (last 24h):\n• Sales Orders: 7 synced / 0 failed ✅\n• Items: 284 active / 12 updated\n• Deliveries: 3 created\n• Invoices: 5 generated ($42,600)\n• Payments: 3 received ($28,400)\n\nHealth: 🟢 All systems operational\nNext sync: 10 minutes',
+          'revenue': '💰 **Revenue Report — Week of March 17–23**\n\n| Stream | Revenue | vs Last Week |\n|--------|---------|-------------|\n| Matching Fees (3-5%) | $8,400 | ↑ +12% |\n| Logistics Commission | $12,800 | ↑ +8% |\n| Trade Finance | $6,200 | ↑ +22% |\n| SaaS Subscriptions | $4,490 | = 0% |\n| Fulfillment Fees | $3,100 | 🆕 New |\n\n**Total Week: $34,990** ↑ +16% WoW\n\n📈 Run rate MRR: $152K/month',
+          default: 'Trade Desk Agent online 📋\n\nI monitor:\n• 📊 Daily GMV, orders, new farmers\n• ✅ Farm verification queue\n• ⚙️ ERPNext sync health\n• 💰 Revenue by stream\n• ⚠️ Operational alerts\n\nAsk me anything about platform status.',
+        },
+      },
+    };
+
+    let currentActor = 'farmer';
+
+    function setActor(actor, btn) {
+      currentActor = actor;
+      document.querySelectorAll('.actor-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Clear chat
+      const cw = document.getElementById('chatWindow');
+      const a = ACTORS[actor];
+      const greetings = {
+        farmer: 'Xin chào! Tôi là AgriVN Farmer Assistant 👨‍🌾\nTôi có thể giúp bạn đăng nguyên liệu, nhận đơn đặt hàng từ nước ngoài, và tìm xưởng gia công gần nhất. Bạn cần gì không?',
+        buyer: 'Hello! I\'m the AgriVN Buyer Agent 🌍\n\nI help global importers source Vietnamese produce — search, quote, track shipments, and apply for trade finance.\n\nWhat are you looking to source today?',
+        logistics: 'Hello! AgriVN Logistics Agent here 🚢\n\nI handle shipping quotes, container bookings, cold chain monitoring, and customs docs for all AgriVN shipments.\n\nWhat do you need?',
+        admin: 'Trade Desk Agent online 📋\n\nMonitoring: GMV, farm verifications, ERPNext sync, weekly revenue. How can I help?',
+      };
+      const timeLabels = { farmer: 'Farmer Actor (Zalo)', buyer: 'Buyer Actor (Telegram)', logistics: 'Logistics Actor (Slack)', admin: 'Admin Actor (Slack)' };
+      cw.innerHTML = `<div class="msg bot"><div class="msg-ava bot">${a.icon}</div><div><div class="msg-bubble">${greetings[actor].replace(/\n/g,'<br/>')}</div><div class="msg-time">Now — ${timeLabels[actor]}</div></div></div>`;
+
+      // Quick messages
+      const qm = document.getElementById('quickMsgs');
+      qm.innerHTML = a.quick.map(q => `<button class="qm" onclick="sendQuick('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('');
+    }
+
+    function sendQuick(msg) {
+      document.getElementById('chatInput').value = msg;
+      sendMsg();
+    }
+
+    function sendMsg() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+
+      const cw = document.getElementById('chatWindow');
+      const now = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+      // User msg
+      cw.innerHTML += `<div class="msg user"><div class="msg-ava user">👤</div><div><div class="msg-bubble">${text}</div><div class="msg-time">${now}</div></div></div>`;
+
+      // Typing
+      const ti = document.getElementById('typingIndicator');
+      ti.style.display = 'flex';
+      cw.scrollTop = cw.scrollHeight;
+
+      const actor = ACTORS[currentActor];
+      const resp = findResponse(actor.responses, text);
+
+      setTimeout(() => {
+        ti.style.display = 'none';
+        const channelLabels = { farmer: 'Zalo', buyer: 'Telegram', logistics: 'Slack', admin: 'Slack' };
+        cw.innerHTML += `<div class="msg bot"><div class="msg-ava bot">${actor.icon}</div><div><div class="msg-bubble">${resp.replace(/\n/g,'<br/>')}</div><div class="msg-time">${now} — via ${channelLabels[currentActor]}</div></div></div>`;
+        cw.scrollTop = cw.scrollHeight;
+      }, 1200 + Math.random() * 600);
+    }
+
+    function findResponse(responses, text) {
+      const lower = text.toLowerCase();
+      for (const [key, val] of Object.entries(responses)) {
+        if (key !== 'default' && lower.includes(key.toLowerCase())) return val;
+      }
+      return responses.default;
+    }
+
+    // Copy code
+    function copyCode(id) {
+      const block = document.getElementById(id);
+      const text = block.innerText.replace('copy', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = block.querySelector('.copy-btn');
+        btn.textContent = 'copied!';
+        setTimeout(() => btn.textContent = 'copy', 1500);
+      });
+    }
+
+    // Init quick messages
+    setActor('farmer', document.querySelector('[data-actor="farmer"]'));
+
+    // Scroll reveal
+    document.querySelectorAll('.actor-card, .step, .test-card').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = `opacity 0.5s ${i * 0.08}s, transform 0.5s ${i * 0.08}s`;
+      const o = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; o.disconnect(); }
+      }, { threshold: 0.1 });
+      o.observe(el);
+    });
+  </script>
+
+</body>
+</html>
