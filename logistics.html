@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVN — Logistics & Shipping</title>
+  <meta name="description" content="AgriVN Logistics — Door-to-port cold chain shipping, container booking, and real-time tracking for agricultural exports." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="logistics.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">AgriVN</span>
+        <span class="nav-badge">Logistics</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Marketplace</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="finance.html" class="nav-link">Finance</a></li>
+        <li><a href="erp.html" class="nav-link">ERP</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="index.html" class="nav-back">← Marketplace</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="log-hero">
+      <div class="log-badge">🚢 12,400+ Shipments Delivered — 96% On-Time</div>
+      <h1 class="log-title">
+        Ship Vietnamese Produce<br />
+        <span class="accent">Anywhere in the World</span>
+      </h1>
+      <p class="log-sub">
+        Door-to-port cold chain logistics with real-time GPS tracking. Reefer containers, customs documentation, and last-mile partnerships across 48 countries.
+      </p>
+    </section>
+
+    <!-- KPI STRIP -->
+    <div class="log-kpi-strip">
+      <div class="log-kpi-card">
+        <div class="log-kpi-num" id="kpiShipments">0</div>
+        <div class="log-kpi-label">Shipments/Year</div>
+      </div>
+      <div class="log-kpi-card">
+        <div class="log-kpi-num" id="kpiCountries">0</div>
+        <div class="log-kpi-label">Countries</div>
+      </div>
+      <div class="log-kpi-card">
+        <div class="log-kpi-num" id="kpiOnTime">0%</div>
+        <div class="log-kpi-label">On-Time Rate</div>
+      </div>
+      <div class="log-kpi-card">
+        <div class="log-kpi-num" id="kpiPartners">0</div>
+        <div class="log-kpi-label">Carrier Partners</div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="services-section">
+      <h2 class="section-title">End-to-End Logistics Services</h2>
+      <div class="services-grid">
+        <div class="svc-card">
+          <div class="svc-icon">🏭</div>
+          <div class="svc-name">Farm Pickup</div>
+          <div class="svc-desc">Truck dispatch from farm to port. Cold chain maintained from harvest.</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">🧊</div>
+          <div class="svc-name">Cold Chain</div>
+          <div class="svc-desc">Reefer containers at -18°C to +2°C. Real-time temperature monitoring.</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">📄</div>
+          <div class="svc-name">Customs Docs</div>
+          <div class="svc-desc">Phytosanitary certs, CO, packing list, commercial invoice auto-generated.</div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">📍</div>
+          <div class="svc-name">GPS Tracking</div>
+          <div class="svc-desc">Live shipment tracking from port-to-port with ETA updates via SMS/email.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE CALCULATOR -->
+    <section class="quote-section">
+      <h2 class="section-title">Instant Shipping Quote</h2>
+      <div class="quote-layout">
+
+        <div class="quote-form-card">
+          <div class="quote-form-title">📦 Get Your Quote</div>
+          <form id="quoteForm">
+            <div class="field">
+              <label for="quoteRoute">Shipping Route</label>
+              <select id="quoteRoute">
+                <option value="hcm-shanghai">HCMC → Shanghai, China</option>
+                <option value="hcm-hamburg">HCMC → Hamburg, Germany</option>
+                <option value="hcm-la">HCMC → Long Beach, USA</option>
+                <option value="hcm-tokyo">HCMC → Tokyo, Japan</option>
+                <option value="hcm-busan">HCMC → Busan, South Korea</option>
+                <option value="hcm-sydney">HCMC → Sydney, Australia</option>
+                <option value="hp-shanghai">Hai Phong → Shanghai, China</option>
+                <option value="hp-hamburg">Hai Phong → Hamburg, Germany</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="quoteContainer">Container Type</label>
+              <select id="quoteContainer">
+                <option value="dry-20">20' Standard Dry</option>
+                <option value="dry-40">40' Standard Dry</option>
+                <option value="reefer-20">20' Reefer (Cold Chain)</option>
+                <option value="reefer-40">40' Reefer (Cold Chain)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="quoteQty">Number of Containers</label>
+              <input type="number" id="quoteQty" min="1" max="100" value="1" />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="quoteCommodity">Commodity</label>
+                <select id="quoteCommodity">
+                  <option>Coffee</option>
+                  <option>Durian</option>
+                  <option>Rice</option>
+                  <option>Dragon Fruit</option>
+                  <option>Cashew</option>
+                  <option>Black Pepper</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="quoteDate">Desired Ship Date</label>
+                <input type="date" id="quoteDate" />
+              </div>
+            </div>
+            <button type="submit" class="quote-btn">Calculate Quote →</button>
+          </form>
+        </div>
+
+        <div class="quote-result-card">
+          <div class="result-title">📊 Quote Estimate</div>
+          <div class="result-row">
+            <span class="result-label">Route</span>
+            <span class="result-value" id="resRoute">Cat Lai, HCMC → Yangshan, Shanghai</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Container</span>
+            <span class="result-value" id="resContainer">20' Dry × 1</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Transit Time</span>
+            <span class="result-value primary" id="resTransit">5-7 days</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Distance</span>
+            <span class="result-value" id="resDistance">1,800 nm</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Ocean Freight</span>
+            <span class="result-value" id="resShipping">$2,800</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Customs & Handling</span>
+            <span class="result-value" id="resCustoms">$140</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Marine Insurance</span>
+            <span class="result-value" id="resInsurance">$56</span>
+          </div>
+          <div class="result-total">
+            <div class="result-total-label">Total Estimated Cost</div>
+            <div class="result-total-num" id="resTotal">$2,996</div>
+            <div class="result-disclaimer">*Excludes port surcharges. Final quote upon booking confirmation.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ROUTE VISUALIZATION -->
+    <section class="route-section">
+      <h2 class="section-title">Your Shipping Route</h2>
+      <div class="route-card">
+        <div class="route-visual">
+          <div class="route-port">
+            <div class="route-port-icon">🇻🇳</div>
+            <div class="route-port-name" id="originPort">Cat Lai, HCMC</div>
+            <div class="route-port-code">VNSGN</div>
+          </div>
+          <span class="route-arrow">→</span>
+          <span class="route-ship">🚢</span>
+          <span class="route-arrow">→</span>
+          <div class="route-port">
+            <div class="route-port-icon">🌍</div>
+            <div class="route-port-name" id="destPort">Yangshan, Shanghai</div>
+            <div class="route-port-code" id="destCode">CNSHA</div>
+          </div>
+        </div>
+        <div class="route-info">
+          <div class="route-info-item">
+            <div class="route-info-num" id="routeTransit">5-7 days</div>
+            <div class="route-info-label">Transit Time</div>
+          </div>
+          <div class="route-info-item">
+            <div class="route-info-num" id="routeDistance">1,800 nm</div>
+            <div class="route-info-label">Distance</div>
+          </div>
+          <div class="route-info-item">
+            <div class="route-info-num" id="routeTEU">1 TEU</div>
+            <div class="route-info-label">Container</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHIPMENT TRACKING -->
+    <section class="tracking-section">
+      <h2 class="section-title">Live Shipment Tracking</h2>
+      <div class="tracking-card">
+        <div class="tracking-header">
+          <div class="tracking-title">📍 Shipment AGV-2026-0847</div>
+          <div class="tracking-id">HCMC → Shanghai</div>
+        </div>
+        <div class="tracking-timeline">
+          <div class="track-step done">
+            <div class="track-step-title">✓ Order Confirmed</div>
+            <div class="track-step-detail">Mar 12, 2026 — Booking ref: BK-20260312-001</div>
+          </div>
+          <div class="track-step done">
+            <div class="track-step-title">✓ Farm Pickup Complete</div>
+            <div class="track-step-detail">Mar 13, 2026 — Picked up from Dak Lak Coffex Farm</div>
+          </div>
+          <div class="track-step done">
+            <div class="track-step-title">✓ Loaded at Cat Lai Port</div>
+            <div class="track-step-detail">Mar 14, 2026 — Container AGVU-2468135 loaded on M/V Ever Green</div>
+          </div>
+          <div class="track-step active">
+            <div class="track-step-title">⬤ In Transit — South China Sea</div>
+            <div class="track-step-detail">Current position: 15.4°N, 112.8°E — ETA Mar 19, 2026</div>
+          </div>
+          <div class="track-step">
+            <div class="track-step-title">Arrival at Yangshan Port</div>
+            <div class="track-step-detail">Estimated: Mar 19, 2026</div>
+          </div>
+          <div class="track-step">
+            <div class="track-step-title">Customs Clearance & Delivery</div>
+            <div class="track-step-detail">Estimated: Mar 20-21, 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING FORM -->
+    <section class="booking-section" id="bookingSection">
+      <h2 class="section-title">Book a Shipment</h2>
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-header-icon">📋</div>
+          <h2>Shipment Booking Request</h2>
+          <p>Fill out the form below. Our logistics team confirms within 4 hours.</p>
+        </div>
+        <form id="bookingForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="bookCompany">Company Name *</label>
+              <input type="text" id="bookCompany" placeholder="e.g. Shanghai Import Co." required />
+            </div>
+            <div class="field">
+              <label for="bookEmail">Business Email *</label>
+              <input type="email" id="bookEmail" placeholder="e.g. logistics@company.com" required />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="bookRoute">Route</label>
+              <select id="bookRoute">
+                <option>HCMC → Shanghai</option>
+                <option>HCMC → Hamburg</option>
+                <option>HCMC → Long Beach</option>
+                <option>HCMC → Tokyo</option>
+                <option>HCMC → Busan</option>
+                <option>HCMC → Sydney</option>
+                <option>Hai Phong → Shanghai</option>
+                <option>Hai Phong → Hamburg</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bookContainer">Container</label>
+              <select id="bookContainer">
+                <option>20' Standard Dry</option>
+                <option>40' Standard Dry</option>
+                <option>20' Reefer</option>
+                <option>40' Reefer</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="bookQty">Containers</label>
+              <input type="number" id="bookQty" value="1" min="1" max="100" />
+            </div>
+            <div class="field">
+              <label for="bookDate">Desired Ship Date</label>
+              <input type="date" id="bookDate" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="bookCommodity">Commodity Description</label>
+            <textarea id="bookCommodity" placeholder="e.g. 20MT Robusta G1 Coffee, UTZ Certified, packed in 60kg jute bags..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">Request Booking</button>
+            <button type="reset" class="btn-cancel">Clear</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2026 AgriVN Logistics. All rights reserved. 🇻🇳 Cat Lai Port, Ho Chi Minh City</p>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <style>@keyframes toastIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }</style>
+  <script src="logistics.js"></script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVN — Chuỗi Cung Ứng | Nông dân → Xưởng gia công → Logistics</title>
+  <meta name="description" content="Kết nối nông dân có nguyên liệu tới xưởng gia công sản phẩm tại các địa phương và logistics xuất khẩu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="supplychain.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">AgriVN</span>
+        <span class="nav-badge">Chuỗi Cung Ứng</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Marketplace</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="finance.html" class="nav-link">Finance</a></li>
+        <li><a href="logistics.html" class="nav-link">Logistics</a></li>
+        <li><a href="erp.html" class="nav-link">ERP</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="index.html" class="nav-back">← Marketplace</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="sc-hero">
+      <div class="sc-badge">🔗 Kết nối chuỗi giá trị nông sản Việt Nam</div>
+      <h1 class="sc-title">
+        Từ <span class="green">Nông Dân</span> → <span class="orange">Xưởng Gia Công</span> → <span class="gold">Xuất Khẩu</span>
+      </h1>
+      <p class="sc-sub">
+        Kết nối trực tiếp người nông dân có nguyên liệu thô tới các xưởng chế biến, gia công sản phẩm tại địa phương. Sau đó vận chuyển tới cảng xuất khẩu qua mạng lưới logistics của AgriVN.
+      </p>
+    </section>
+
+    <!-- FLOW VISUAL -->
+    <section class="flow-section">
+      <div class="flow-visual">
+        <div class="flow-node farmer">
+          <div class="flow-icon">👨‍🌾</div>
+          <div class="flow-name">Nông Dân</div>
+          <div class="flow-desc">Nguyên liệu thô: cà phê nhân, sầu riêng tươi, lúa, hạt điều thô...</div>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node factory">
+          <div class="flow-icon">🏭</div>
+          <div class="flow-name">Xưởng Gia Công</div>
+          <div class="flow-desc">Chế biến, sơ chế, đóng gói theo tiêu chuẩn xuất khẩu quốc tế</div>
+          <div class="flow-commission">💰 3-5% phí</div>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node logistics">
+          <div class="flow-icon">🚛</div>
+          <div class="flow-name">Vận Chuyển</div>
+          <div class="flow-desc">Cold chain từ xưởng → cảng, container lạnh, theo dõi GPS</div>
+          <div class="flow-commission">💰 2-4% phí</div>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node buyer">
+          <div class="flow-icon">🌍</div>
+          <div class="flow-name">Buyer Quốc Tế</div>
+          <div class="flow-desc">48 quốc gia: Trung Quốc, Mỹ, Đức, Nhật, Hàn Quốc...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FARMERS -->
+    <section class="farmer-section">
+      <h2 class="section-title">👨‍🌾 Nguồn Nguyên Liệu — Nông Dân Đã Xác Minh</h2>
+      <p class="section-sub">1,200+ hộ nông dân và hợp tác xã trên toàn quốc, sẵn sàng cung cấp nguyên liệu thô</p>
+      <div class="farmer-grid">
+
+        <div class="farmer-card">
+          <div class="farmer-header">
+            <div class="farmer-avatar">☕</div>
+            <div class="farmer-info">
+              <div class="farmer-name">HTX Cà Phê Buôn Ma Thuột</div>
+              <div class="farmer-loc">📍 Đắk Lắk, Tây Nguyên</div>
+            </div>
+          </div>
+          <div class="farmer-materials">
+            <span class="material-tag">Robusta nhân</span>
+            <span class="material-tag">Arabica nhân</span>
+            <span class="material-tag">Cà phê cherry</span>
+          </div>
+          <div class="farmer-stats">
+            <div><div class="farmer-stat-num">240 MT/vụ</div><div class="farmer-stat-label">Sản lượng</div></div>
+            <div><div class="farmer-stat-num">4.9 ★</div><div class="farmer-stat-label">Đánh giá</div></div>
+            <div><div class="farmer-stat-num">UTZ</div><div class="farmer-stat-label">Chứng nhận</div></div>
+          </div>
+          <button class="farmer-cta">Kết nối với xưởng →</button>
+        </div>
+
+        <div class="farmer-card">
+          <div class="farmer-header">
+            <div class="farmer-avatar">🍈</div>
+            <div class="farmer-info">
+              <div class="farmer-name">Vườn Sầu Riêng Tiền Giang</div>
+              <div class="farmer-loc">📍 Cai Lậy, Tiền Giang</div>
+            </div>
+          </div>
+          <div class="farmer-materials">
+            <span class="material-tag">Monthong tươi</span>
+            <span class="material-tag">Ri6 tươi</span>
+            <span class="material-tag">Sầu riêng cơm</span>
+          </div>
+          <div class="farmer-stats">
+            <div><div class="farmer-stat-num">80 MT/vụ</div><div class="farmer-stat-label">Sản lượng</div></div>
+            <div><div class="farmer-stat-num">4.8 ★</div><div class="farmer-stat-label">Đánh giá</div></div>
+            <div><div class="farmer-stat-num">GAP</div><div class="farmer-stat-label">Chứng nhận</div></div>
+          </div>
+          <button class="farmer-cta">Kết nối với xưởng →</button>
+        </div>
+
+        <div class="farmer-card">
+          <div class="farmer-header">
+            <div class="farmer-avatar">🌾</div>
+            <div class="farmer-info">
+              <div class="farmer-name">HTX Lúa Gạo Sóc Trăng</div>
+              <div class="farmer-loc">📍 Sóc Trăng, Mekong Delta</div>
+            </div>
+          </div>
+          <div class="farmer-materials">
+            <span class="material-tag">Lúa ST25</span>
+            <span class="material-tag">Lúa Jasmine</span>
+            <span class="material-tag">Nếp</span>
+          </div>
+          <div class="farmer-stats">
+            <div><div class="farmer-stat-num">1,200 MT/vụ</div><div class="farmer-stat-label">Sản lượng</div></div>
+            <div><div class="farmer-stat-num">4.7 ★</div><div class="farmer-stat-label">Đánh giá</div></div>
+            <div><div class="farmer-stat-num">Organic</div><div class="farmer-stat-label">Chứng nhận</div></div>
+          </div>
+          <button class="farmer-cta">Kết nối với xưởng →</button>
+        </div>
+
+        <div class="farmer-card">
+          <div class="farmer-header">
+            <div class="farmer-avatar">🫘</div>
+            <div class="farmer-info">
+              <div class="farmer-name">Nông Trại Điều Bình Phước</div>
+              <div class="farmer-loc">📍 Bình Phước, Đông Nam Bộ</div>
+            </div>
+          </div>
+          <div class="farmer-materials">
+            <span class="material-tag">Hạt điều thô</span>
+            <span class="material-tag">Điều vỏ</span>
+          </div>
+          <div class="farmer-stats">
+            <div><div class="farmer-stat-num">45 MT/vụ</div><div class="farmer-stat-label">Sản lượng</div></div>
+            <div><div class="farmer-stat-num">4.9 ★</div><div class="farmer-stat-label">Đánh giá</div></div>
+            <div><div class="farmer-stat-num">FSSC</div><div class="farmer-stat-label">Chứng nhận</div></div>
+          </div>
+          <button class="farmer-cta">Kết nối với xưởng →</button>
+        </div>
+
+        <div class="farmer-card">
+          <div class="farmer-header">
+            <div class="farmer-avatar">🐉</div>
+            <div class="farmer-info">
+              <div class="farmer-name">Trang Trại Thanh Long Bình Thuận</div>
+              <div class="farmer-loc">📍 Bình Thuận, Nam Trung Bộ</div>
+            </div>
+          </div>
+          <div class="farmer-materials">
+            <span class="material-tag">Thanh long ruột đỏ</span>
+            <span class="material-tag">Thanh long ruột trắng</span>
+          </div>
+          <div class="farmer-stats">
+            <div><div class="farmer-stat-num">320 MT/vụ</div><div class="farmer-stat-label">Sản lượng</div></div>
+            <div><div class="farmer-stat-num">4.6 ★</div><div class="farmer-stat-label">Đánh giá</div></div>
+            <div><div class="farmer-stat-num">GAP</div><div class="farmer-stat-label">Chứng nhận</div></div>
+          </div>
+          <button class="farmer-cta">Kết nối với xưởng →</button>
+        </div>
+
+        <div class="farmer-card">
+          <div class="farmer-header">
+            <div class="farmer-avatar">🌶️</div>
+            <div class="farmer-info">
+              <div class="farmer-name">HTX Hồ Tiêu Gia Lai</div>
+              <div class="farmer-loc">📍 Gia Lai, Tây Nguyên</div>
+            </div>
+          </div>
+          <div class="farmer-materials">
+            <span class="material-tag">Tiêu đen tươi</span>
+            <span class="material-tag">Tiêu trắng</span>
+          </div>
+          <div class="farmer-stats">
+            <div><div class="farmer-stat-num">150 MT/vụ</div><div class="farmer-stat-label">Sản lượng</div></div>
+            <div><div class="farmer-stat-num">4.8 ★</div><div class="farmer-stat-label">Đánh giá</div></div>
+            <div><div class="farmer-stat-num">Organic</div><div class="farmer-stat-label">Chứng nhận</div></div>
+          </div>
+          <button class="farmer-cta">Kết nối với xưởng →</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FACTORIES -->
+    <section class="factory-section">
+      <h2 class="section-title">🏭 Xưởng Gia Công — Chế Biến Tại Địa Phương</h2>
+      <p class="section-sub">Mạng lưới xưởng chế biến đã xác minh, sẵn sàng nhận nguyên liệu từ nông dân và gia công theo đơn</p>
+      <div class="factory-grid">
+
+        <div class="factory-card">
+          <div class="factory-header">
+            <div class="factory-icon">☕</div>
+            <div>
+              <div class="factory-name">Đắk Lắk Coffee Processing</div>
+              <div class="factory-loc">📍 Buôn Ma Thuột, Đắk Lắk</div>
+              <div class="factory-type">Xưởng chế biến cà phê</div>
+            </div>
+          </div>
+          <ul class="factory-caps">
+            <li><span class="fc">✓</span> Sấy khô & rang xay</li>
+            <li><span class="fc">✓</span> Phân loại hạt theo size</li>
+            <li><span class="fc">✓</span> Đóng gói xuất khẩu (60kg jute)</li>
+            <li><span class="fc">✓</span> ISO 22000, HACCP</li>
+          </ul>
+          <div class="factory-stats">
+            <div class="factory-stat"><div class="factory-stat-num">500</div><div class="factory-stat-label">MT/tháng</div></div>
+            <div class="factory-stat"><div class="factory-stat-num">120</div><div class="factory-stat-label">Công nhân</div></div>
+          </div>
+          <button class="factory-cta">Gửi nguyên liệu →</button>
+        </div>
+
+        <div class="factory-card">
+          <div class="factory-header">
+            <div class="factory-icon">🍈</div>
+            <div>
+              <div class="factory-name">Mekong Fruit Factory</div>
+              <div class="factory-loc">📍 Tiền Giang, Mekong Delta</div>
+              <div class="factory-type">Xưởng sơ chế trái cây</div>
+            </div>
+          </div>
+          <ul class="factory-caps">
+            <li><span class="fc">✓</span> IQF Freezing (-35°C)</li>
+            <li><span class="fc">✓</span> Puree & sấy dẻo</li>
+            <li><span class="fc">✓</span> Đóng gói vacuum / carton</li>
+            <li><span class="fc">✓</span> GlobalG.A.P, BRC</li>
+          </ul>
+          <div class="factory-stats">
+            <div class="factory-stat"><div class="factory-stat-num">300</div><div class="factory-stat-label">MT/tháng</div></div>
+            <div class="factory-stat"><div class="factory-stat-num">85</div><div class="factory-stat-label">Công nhân</div></div>
+          </div>
+          <button class="factory-cta">Gửi nguyên liệu →</button>
+        </div>
+
+        <div class="factory-card">
+          <div class="factory-header">
+            <div class="factory-icon">🌾</div>
+            <div>
+              <div class="factory-name">An Giang Rice Mill</div>
+              <div class="factory-loc">📍 Long Xuyên, An Giang</div>
+              <div class="factory-type">Nhà máy xay xát gạo</div>
+            </div>
+          </div>
+          <ul class="factory-caps">
+            <li><span class="fc">✓</span> Xay xát & đánh bóng</li>
+            <li><span class="fc">✓</span> Phân loại hạt tự động</li>
+            <li><span class="fc">✓</span> Đóng bao 50kg / 25kg</li>
+            <li><span class="fc">✓</span> ISO 9001, USDA Organic</li>
+          </ul>
+          <div class="factory-stats">
+            <div class="factory-stat"><div class="factory-stat-num">2,000</div><div class="factory-stat-label">MT/tháng</div></div>
+            <div class="factory-stat"><div class="factory-stat-num">200</div><div class="factory-stat-label">Công nhân</div></div>
+          </div>
+          <button class="factory-cta">Gửi nguyên liệu →</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MATCHING ENGINE -->
+    <section class="match-section" id="matchSection">
+      <h2 class="section-title">🔍 Tìm Xưởng Gia Công Phù Hợp</h2>
+      <p class="section-sub">Nhập thông tin nguyên liệu — AI sẽ tìm xưởng gia công tốt nhất cho bạn</p>
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-header-icon">🤖</div>
+          <h2>Matching Engine</h2>
+          <p>Kết nối tự động: Nông dân ↔ Xưởng gia công ↔ Logistics</p>
+        </div>
+
+        <form id="matchForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="matchMaterial">Loại Nguyên Liệu *</label>
+              <select id="matchMaterial" required>
+                <option value="">Chọn nguyên liệu...</option>
+                <option value="Cà phê Robusta">☕ Cà phê Robusta nhân</option>
+                <option value="Cà phê Arabica">☕ Cà phê Arabica nhân</option>
+                <option value="Sầu riêng Monthong">🍈 Sầu riêng Monthong tươi</option>
+                <option value="Sầu riêng Ri6">🍈 Sầu riêng Ri6 tươi</option>
+                <option value="Gạo ST25">🌾 Lúa ST25 / Jasmine</option>
+                <option value="Gạo">🌾 Lúa trắng 5%</option>
+                <option value="Hạt điều thô">🫘 Hạt điều thô</option>
+                <option value="Thanh long">🐉 Thanh long tươi</option>
+                <option value="Hồ tiêu">🌶️ Hồ tiêu tươi</option>
+                <option value="Xoài">🥭 Xoài Cat Hoa Loc</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="matchRegion">Vùng Nguyên Liệu</label>
+              <select id="matchRegion">
+                <option value="">Tất cả vùng...</option>
+                <option value="Đắk Lắk">Đắk Lắk</option>
+                <option value="Lâm Đồng">Lâm Đồng</option>
+                <option value="Gia Lai">Gia Lai</option>
+                <option value="Tiền Giang">Tiền Giang</option>
+                <option value="Bình Phước">Bình Phước</option>
+                <option value="Sóc Trăng">Sóc Trăng</option>
+                <option value="An Giang">An Giang</option>
+                <option value="Đồng Tháp">Đồng Tháp</option>
+                <option value="Bình Thuận">Bình Thuận</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="matchVolume">Khối Lượng (MT)</label>
+              <input type="number" id="matchVolume" placeholder="VD: 50" min="1" />
+            </div>
+            <div class="field">
+              <label for="matchFreq">Tần Suất Cung Cấp</label>
+              <select id="matchFreq">
+                <option value="once">Một lần</option>
+                <option value="monthly">Hàng tháng</option>
+                <option value="seasonal">Theo mùa vụ</option>
+                <option value="year-round">Quanh năm</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="matchNotes">Ghi Chú Thêm</label>
+            <textarea id="matchNotes" placeholder="VD: Cần xưởng có chứng nhận HACCP, công suất trên 100MT/tháng, gần cảng Cát Lái..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">🔍 Tìm xưởng gia công</button>
+            <button type="reset" class="btn-cancel">Xóa</button>
+          </div>
+        </form>
+
+        <!-- MATCH RESULTS -->
+        <div class="match-result" id="matchResult">
+          <div class="match-result-header">✅ Kết quả phù hợp</div>
+          <div class="match-result-list" id="matchList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVENUE MODEL -->
+    <section class="revenue-section">
+      <h2 class="section-title">💰 Mô Hình Kiếm Tiền — Phí Kết Nối Chuỗi</h2>
+      <p class="section-sub">AgriVN thu phí trên mỗi giao dịch kết nối thành công trong chuỗi cung ứng</p>
+      <div class="revenue-grid">
+        <div class="rev-card">
+          <div class="rev-icon">🤝</div>
+          <div class="rev-name">Phí Kết Nối</div>
+          <div class="rev-rate">3-5%</div>
+          <div class="rev-desc">Phí matching khi nông dân được kết nối thành công với xưởng gia công. Tính trên giá trị đơn hàng.</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-icon">🚛</div>
+          <div class="rev-name">Phí Logistics</div>
+          <div class="rev-rate">2-4%</div>
+          <div class="rev-desc">Hoa hồng vận chuyển từ xưởng → cảng → quốc tế. Bao gồm cold chain và customs.</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-icon">📊</div>
+          <div class="rev-name">Subscription</div>
+          <div class="rev-rate">$299-999/mo</div>
+          <div class="rev-desc">Gói trả phí cho xưởng và buyer: quản lý đơn hàng, AI matching, market data.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2026 AgriVN Supply Chain. Kết nối chuỗi giá trị nông sản Việt Nam 🇻🇳</p>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+  <style>@keyframes toastIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }</style>
+  <script src="supplychain.js"></script>
+</body>
+</html>

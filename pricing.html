@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVN — Pricing & Plans</title>
+  <meta name="description" content="AgriVN platform pricing. Choose from Starter, Professional, or Enterprise plans to scale your agricultural trade." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="pricing.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">AgriVN</span>
+        <span class="nav-badge">Pricing</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Marketplace</a></li>
+        <li><a href="admin.html" class="nav-link">Trade Desk</a></li>
+        <li><a href="erp.html" class="nav-link">ERP</a></li>
+        <li><a href="finance.html" class="nav-link">Finance</a></li>
+        <li><a href="logistics.html" class="nav-link">Logistics</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="index.html" class="nav-back">← Back to Marketplace</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pricing-hero">
+    <div class="pricing-badge">
+      <span class="badge-dot"></span>
+      Transparent Pricing — No Hidden Fees
+    </div>
+    <h1 class="pricing-title">
+      Scale Your Agri Trade<br />
+      with the <span class="accent">Right Plan</span>
+    </h1>
+    <p class="pricing-sub">
+      From solo importers to enterprise trading houses — every plan includes access to 1,200+ verified Vietnamese farms.
+    </p>
+  </section>
+
+  <!-- TOGGLE -->
+  <div class="toggle-wrap">
+    <span class="toggle-label active" id="labelMonthly">Monthly</span>
+    <div class="toggle-track" id="toggleTrack">
+      <div class="toggle-thumb"></div>
+    </div>
+    <span class="toggle-label" id="labelYearly">Yearly</span>
+    <span class="save-badge">Save 20%</span>
+  </div>
+
+  <!-- PRICING GRID -->
+  <div class="container">
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="plan-card" id="planFree">
+        <div class="plan-icon">🌱</div>
+        <div class="plan-name">Starter</div>
+        <div class="plan-desc">Perfect for exploring the marketplace</div>
+        <div class="plan-price-wrap">
+          <div class="plan-price"><span class="currency">$</span>0<span class="period">/mo</span></div>
+          <div class="plan-price-note">Free forever, no credit card</div>
+        </div>
+        <hr class="plan-divider" />
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Browse full marketplace</li>
+          <li><span class="check">✓</span> Real-time price ticker</li>
+          <li><span class="check">✓</span> 3 RFQs per month</li>
+          <li><span class="check">✓</span> View producer profiles</li>
+          <li><span class="check">✓</span> Market intelligence (delayed)</li>
+          <li class="disabled"><span class="check">✓</span> AI Sourcing Assistant</li>
+          <li class="disabled"><span class="check">✓</span> Price alerts</li>
+          <li class="disabled"><span class="check">✓</span> Trade finance access</li>
+        </ul>
+        <button class="plan-cta plan-cta-free" data-plan="free" id="ctaFree">Get Started Free</button>
+      </div>
+
+      <!-- PRO (FEATURED) -->
+      <div class="plan-card featured" id="planPro">
+        <div class="plan-ribbon">Most Popular</div>
+        <div class="plan-icon">🚀</div>
+        <div class="plan-name">Professional</div>
+        <div class="plan-desc">For active importers & export agents</div>
+        <div class="plan-price-wrap">
+          <div class="plan-price" id="proPrice"><span class="currency">$</span>299<span class="period">/mo</span></div>
+          <div class="plan-price-note" id="proNote">Billed monthly, cancel anytime</div>
+        </div>
+        <hr class="plan-divider" />
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Everything in Starter</li>
+          <li class="highlight"><span class="check">✓</span> Unlimited RFQs</li>
+          <li class="highlight"><span class="check">✓</span> AI Sourcing Assistant</li>
+          <li><span class="check">✓</span> Real-time price alerts</li>
+          <li><span class="check">✓</span> Farm verification reports</li>
+          <li><span class="check">✓</span> Priority sample requests</li>
+          <li><span class="check">✓</span> Trade analytics dashboard</li>
+          <li class="disabled"><span class="check">✓</span> API access</li>
+        </ul>
+        <button class="plan-cta plan-cta-pro" data-plan="pro" id="ctaPro">Start 14-Day Free Trial</button>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="plan-card" id="planEnterprise">
+        <div class="plan-icon">🏢</div>
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-desc">Full-stack trade infrastructure</div>
+        <div class="plan-price-wrap">
+          <div class="plan-price" id="entPrice"><span class="currency">$</span>999<span class="period">/mo</span></div>
+          <div class="plan-price-note" id="entNote">Billed monthly, custom invoicing</div>
+        </div>
+        <hr class="plan-divider" />
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Everything in Professional</li>
+          <li class="highlight"><span class="check">✓</span> Trade finance access (LC, factoring)</li>
+          <li class="highlight"><span class="check">✓</span> Logistics booking & tracking</li>
+          <li><span class="check">✓</span> Dedicated account manager</li>
+          <li><span class="check">✓</span> API access & webhooks</li>
+          <li><span class="check">✓</span> Custom ERP integration</li>
+          <li><span class="check">✓</span> Multi-user seats (up to 25)</li>
+          <li><span class="check">✓</span> SLA & priority support</li>
+        </ul>
+        <button class="plan-cta plan-cta-enterprise" data-plan="enterprise" id="ctaEnterprise">Contact Sales</button>
+      </div>
+
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="comparison-section">
+      <h2 class="comp-title">Full Feature Comparison</h2>
+      <div class="comp-table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th style="width:40%">Feature</th>
+              <th>Starter</th>
+              <th>Professional</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="comp-group-header"><td colspan="4">📦 Marketplace Access</td></tr>
+            <tr><td>Browse listings</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Price ticker</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Producer profiles</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>RFQ (Request for Quote)</td><td class="comp-value">3/mo</td><td class="comp-value">Unlimited</td><td class="comp-value">Unlimited</td></tr>
+
+            <tr class="comp-group-header"><td colspan="4">🤖 AI & Intelligence</td></tr>
+            <tr><td>AI Sourcing Chat</td><td class="comp-x">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Price alerts</td><td class="comp-x">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Farm verification reports</td><td class="comp-x">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Market intelligence</td><td class="comp-value">Delayed</td><td class="comp-value">Real-time</td><td class="comp-value">Real-time + API</td></tr>
+
+            <tr class="comp-group-header"><td colspan="4">💰 Trade Services</td></tr>
+            <tr><td>Trade finance (LC, factoring)</td><td class="comp-x">—</td><td class="comp-x">—</td><td class="comp-check">✓</td></tr>
+            <tr><td>Logistics booking</td><td class="comp-x">—</td><td class="comp-x">—</td><td class="comp-check">✓</td></tr>
+            <tr><td>ERP integration</td><td class="comp-x">—</td><td class="comp-x">—</td><td class="comp-check">✓</td></tr>
+            <tr><td>API access</td><td class="comp-x">—</td><td class="comp-x">—</td><td class="comp-check">✓</td></tr>
+
+            <tr class="comp-group-header"><td colspan="4">👥 Support & Team</td></tr>
+            <tr><td>Community support</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Email support</td><td class="comp-x">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+            <tr><td>Dedicated account manager</td><td class="comp-x">—</td><td class="comp-x">—</td><td class="comp-check">✓</td></tr>
+            <tr><td>Team seats</td><td class="comp-value">1</td><td class="comp-value">5</td><td class="comp-value">25</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item open">
+        <div class="faq-q">Can I try Professional for free? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes! Every Professional plan starts with a 14-day free trial. No credit card required. You can upgrade, downgrade, or cancel anytime during the trial.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What payment methods do you accept? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">We accept Visa, Mastercard, bank wire transfer, and for Enterprise clients, custom invoicing with NET-30 terms. All payments are processed securely through Stripe.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does Trade Finance work? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Enterprise clients get access to pre-shipment financing, invoice factoring (up to 90 days), and Letter of Credit services through our banking partners. Apply directly from the dashboard after completing verification.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I switch plans anytime? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Absolutely. Upgrade instantly at any time — you'll be charged a prorated amount. Downgrades take effect at the end of your current billing cycle. No cancellation fees.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What happens to my data if I cancel? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Your data is retained for 90 days after cancellation. You can export all trade records, contacts, and analytics at any time. After 90 days, data is permanently deleted per our privacy policy.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do you offer discounts for startups or NGOs? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes! We offer 50% off Professional for verified startups (under 2 years old) and special pricing for agricultural NGOs and cooperatives. Contact us at partners@agrivn.com.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BOTTOM -->
+  <section class="cta-bottom">
+    <div class="container">
+      <h2>Ready to Transform Your Agricultural Trade?</h2>
+      <p>Join 3,800+ importers and 1,200+ producers on Vietnam's #1 agri export platform</p>
+      <div class="cta-bottom-btns">
+        <button class="cta-btn-primary" onclick="document.getElementById('planPro').scrollIntoView({behavior:'smooth'})">Start Free Trial</button>
+        <button class="cta-btn-ghost" onclick="window.location.href='index.html'">Explore Marketplace</button>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item"><span class="trust-icon">🔒</span> SOC 2 Compliant</div>
+        <div class="trust-item"><span class="trust-icon">🏦</span> $340M+ Financed</div>
+        <div class="trust-item"><span class="trust-icon">🌍</span> 48 Countries</div>
+        <div class="trust-item"><span class="trust-icon">⚡</span> 99.9% Uptime</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2026 AgriVN. All rights reserved. 🇻🇳 Headquartered in Ho Chi Minh City</p>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toastContainer" style="position:fixed;bottom:24px;right:24px;z-index:5000;display:flex;flex-direction:column;gap:10px;"></div>
+
+  <script src="pricing.js"></script>
+</body>
+</html>
